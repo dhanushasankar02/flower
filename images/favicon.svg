@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea7299"/>
+      <stop offset="100%" stop-color="#b83b68"/>
+    </linearGradient>
+    <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2da"/>
+      <stop offset="100%" stop-color="#f5c285"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle for crisp rendering on light & dark browser tabs -->
+  <circle cx="50" cy="50" r="46" fill="#fcfaf7" stroke="#e8d9cf" stroke-width="2"/>
+
+  <!-- 8 Outer Petals -->
+  <g fill="url(#petalGrad)">
+    <path d="M50 50 C40 18 60 18 50 50 Z" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(45 50 50)" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(90 50 50)" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(135 50 50)" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(180 50 50)" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(225 50 50)" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(270 50 50)" />
+    <path d="M50 50 C40 18 60 18 50 50 Z" transform="rotate(315 50 50)" />
+  </g>
+
+  <!-- Inner Petal Highlights -->
+  <g fill="#f49cb8" opacity="0.75">
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(22.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(67.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(112.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(157.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(202.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(247.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(292.5 50 50)" />
+    <path d="M50 50 C44 28 56 28 50 50 Z" transform="rotate(337.5 50 50)" />
+  </g>
+
+  <!-- Golden Stamen Center -->
+  <circle cx="50" cy="50" r="12" fill="url(#centerGrad)" stroke="#a12c54" stroke-width="2"/>
+  <circle cx="50" cy="50" r="4" fill="#a12c54"/>
+</svg>
