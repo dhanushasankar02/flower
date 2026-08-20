@@ -1,0 +1,2895 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>FloraLux | Private Custom Arrangement Studio & Bespoke Staging</title>
+  <meta name="description" content="FloraLux Custom Arrangement Studio. Collaborate with senior floral architects to design bespoke living installations, 3D botanical renderings, rare stem vaults, and custom vessels.">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+    /* --- Global Responsive Design Tokens --- */
+    :root {
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      
+      --font-size-h1: clamp(2.25rem, 5vw, 3.25rem);
+      --font-size-h2: clamp(1.65rem, 3.5vw, 2.25rem);
+      --font-size-h3: clamp(1.1rem, 2vw, 1.25rem);
+      --font-size-body: clamp(0.9rem, 1.2vw, 0.975rem);
+
+      /* Light Theme Variables */
+      --bg-primary: hsl(35, 30%, 98%);
+      --bg-secondary: hsl(35, 20%, 94%);
+      --bg-card: hsl(0, 0%, 100%);
+      --text-primary: hsl(210, 25%, 12%);
+      --text-secondary: hsl(210, 15%, 35%);
+      --text-muted: hsl(210, 10%, 55%);
+      
+      --primary: hsl(340, 60%, 62%);
+      --primary-hover: hsl(340, 55%, 52%);
+      --primary-light: hsl(340, 70%, 95%);
+      
+      --accent: hsl(145, 20%, 42%);
+      --accent-hover: hsl(145, 20%, 32%);
+      --accent-light: hsl(145, 35%, 94%);
+      
+      --border: hsl(35, 15%, 88%);
+      --border-focus: var(--primary);
+      --navbar-bg: rgba(252, 250, 247, 0.88);
+      
+      --footer-bg: hsl(35, 20%, 94%);
+      --footer-text: var(--text-secondary);
+      --footer-title: var(--text-primary);
+      --footer-border: var(--border);
+      --footer-social-border: var(--border);
+      --footer-social-bg: var(--bg-card);
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.1);
+      --shadow-navbar: 0 4px 30px rgba(0, 0, 0, 0.03);
+      
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      --max-width: 1200px;
+    }
+
+    /* Dark Theme Variables */
+    body.dark {
+      --bg-primary: hsl(210, 25%, 7%);
+      --bg-secondary: hsl(210, 25%, 11%);
+      --bg-card: hsl(210, 25%, 13%);
+      --text-primary: hsl(35, 15%, 90%);
+      --text-secondary: hsl(210, 10%, 75%);
+      --text-muted: hsl(210, 10%, 55%);
+      
+      --primary: hsl(340, 65%, 72%);
+      --primary-hover: hsl(340, 70%, 80%);
+      --primary-light: hsla(340, 65%, 72%, 0.12);
+      
+      --accent: hsl(145, 25%, 58%);
+      --accent-hover: hsl(145, 25%, 68%);
+      --accent-light: hsla(145, 25%, 58%, 0.12);
+      
+      --border: hsl(210, 20%, 18%);
+      --border-focus: var(--primary);
+      --navbar-bg: rgba(12, 16, 20, 0.88);
+      
+      --footer-bg: hsl(210, 25%, 9%);
+      --footer-text: var(--text-secondary);
+      --footer-title: var(--text-primary);
+      --footer-border: var(--border);
+      --footer-social-border: var(--border);
+      --footer-social-bg: var(--bg-card);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      transition: background-color var(--transition-smooth), color var(--transition-smooth);
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    img, svg, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: var(--font-size-h1);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: var(--font-size-h2);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: var(--font-size-h3);
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--transition-fast);
+    }
+
+    button, input, textarea, select {
+      font-family: var(--font-body);
+      font-size: var(--font-size-body);
+      outline: none;
+    }
+
+    /* --- Fixed Sticky Navbar --- */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: var(--navbar-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-navbar);
+      transition: background-color var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      stroke: var(--primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 0.9rem;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 0.35rem 0.15rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 140px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+      padding: 0.4rem 0;
+      z-index: 110;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .dropdown-link:hover {
+      background-color: var(--bg-secondary);
+      color: var(--primary);
+    }
+
+    .arrow-down {
+      width: 8px;
+      height: 8px;
+      fill: currentColor;
+      transition: transform var(--transition-fast);
+    }
+
+    .nav-item:hover .arrow-down {
+      transform: rotate(180deg);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+  flex-wrap: nowrap !important;
+}
+
+    .action-btn, .icon-btn {
+      background: none;
+      border: 1px solid var(--border);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      min-height: 44px;
+      padding: 0.6rem 1.4rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      touch-action: manipulation;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px var(--primary-light);
+    }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .mobile-toggle span {
+      height: 2px;
+      width: 100%;
+      background-color: var(--text-primary);
+      border-radius: 2px;
+      transition: all var(--transition-fast);
+    }
+
+    /* --- SECTION 1: Hero Section --- */
+    .hero-custom {
+      position: relative;
+      width: 100%;
+      height: 75vh;
+      min-height: 520px;
+      max-height: 640px;
+      margin-top: 60px;
+      background-image: url('./images/bg4.jpg?v=2');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-custom-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.55) 100%);
+      z-index: 1;
+    }
+
+    .hero-custom-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      padding: 2rem 1.25rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-custom-content h1 {
+      color: #fff;
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-custom-content p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      margin-bottom: 2rem;
+    }
+
+    .hero-stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-pill {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* --- SECTION LAYOUT BLOCKS --- */
+    .section-block {
+      padding: clamp(3.5rem, 7vw, 6rem) 1.25rem;
+      border-bottom: 1px solid var(--border);
+      transition: background-color var(--transition-smooth);
+    }
+
+    .section-block.alt-bg {
+      background-color: var(--bg-secondary);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      padding: 0.3rem 0.85rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.75rem;
+    }
+
+    /* SECTION 2 LAYOUT: Centered Quiz Card + 3 Feature Highlights */
+    .quiz-wizard-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 4vw, 3.5rem);
+      box-shadow: var(--shadow-md);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .quiz-step-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .quiz-chip-group {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .quiz-chip {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .quiz-chip:hover, .quiz-chip.active {
+      background-color: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .quiz-feature-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .quiz-feature-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: start;
+    }
+
+    [dir="rtl"] .quiz-feature-item {
+      text-align: right;
+    }
+
+    /* SECTION 3 LAYOUT: Asymmetrical Blueprint Laboratory */
+    .blueprint-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .blueprint-canvas-box {
+      background: #0f1622;
+      border: 1px solid #233248;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      color: #7ce5ff;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .blueprint-grid-lines {
+      border: 1px dashed rgba(124, 229, 255, 0.25);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .blueprint-step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .blueprint-step-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .blueprint-step-num {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* SECTION 4 LAYOUT: 3-Column Luxury Vault Cards */
+    .vault-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .vault-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .vault-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .vault-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .vault-card-body {
+      padding: 1.5rem;
+      text-align: start;
+    }
+
+    [dir="rtl"] .vault-card-body {
+      text-align: right;
+    }
+
+    /* SECTION 5 LAYOUT: 4-Card Material Palette Grid */
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .material-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .material-icon {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* SECTION 6 LAYOUT: Interactive Appointment Suite */
+    .consult-suite-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .consult-profile-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      text-align: start;
+    }
+
+    [dir="rtl"] .consult-profile-card {
+      text-align: right;
+    }
+
+    /* SECTION 7 LAYOUT: 3-Column Gallery Grid */
+    .gallery-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      aspect-ratio: 4/3;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--footer-bg);
+      border-top: 1px solid var(--footer-border);
+      padding: clamp(3rem, 6vw, 4.5rem) 0 2rem 0;
+      color: var(--footer-text);
+      transition: background-color var(--transition-smooth), border-color var(--transition-smooth), color var(--transition-smooth);
+    }
+
+    footer a {
+      color: var(--footer-text) !important;
+      transition: color var(--transition-fast);
+    }
+
+    footer a:hover {
+      color: var(--primary) !important;
+    }
+
+    footer .logo {
+      color: var(--footer-title) !important;
+      margin-bottom: 1rem;
+    }
+
+    footer .logo span {
+      color: var(--primary);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr 0.9fr 1.1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem 3rem 1.25rem;
+      border-bottom: 1px solid var(--footer-border);
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      text-align: start;
+    }
+
+    [dir="rtl"] .footer-col {
+      text-align: right;
+    }
+
+    .brand-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .footer-col h4 {
+      color: var(--footer-title);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .footer-col-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col-links li {
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .arrow-pref {
+      color: var(--primary);
+      margin-inline-end: 0.5rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    [dir="rtl"] .arrow-pref {
+      transform: scaleX(-1);
+      display: inline-block;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--footer-social-border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--footer-text) !important;
+      background-color: var(--footer-social-bg);
+      transition: all var(--transition-fast) !important;
+    }
+
+    .social-icon:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      color: var(--primary) !important;
+      transform: translateY(-2px);
+    }
+
+    .contact-info-list-footer {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .contact-info-list-footer li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--footer-text);
+    }
+
+    .contact-icon {
+      width: 18px;
+      height: 18px;
+      fill: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-base {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 0 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-base-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--transition-fast), visibility var(--transition-fast);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transform: translateY(20px);
+      transition: transform var(--transition-smooth);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    [dir="rtl"] .modal-close {
+      right: auto;
+      left: 1rem;
+    }
+
+    .modal-header {
+      padding: 2.5rem 1.5rem 1rem 1.5rem;
+      text-align: center;
+    }
+
+    .modal-body {
+      padding: 1rem 1.5rem 2rem 1.5rem;
+    }
+
+    .modal-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .modal-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      text-align: start;
+    }
+
+    [dir="rtl"] .form-group {
+      text-align: right;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1rem;
+      width: 100%;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--accent);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-weight: 500;
+      z-index: 250;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: calc(100vw - 4rem);
+    }
+
+    [dir="rtl"] .toast {
+      right: auto;
+      left: 2rem;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Breakpoints */
+    @media (max-width: 991px) {
+      .blueprint-grid, .consult-suite-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .vault-cards-grid, .gallery-trio {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .materials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background-color: var(--bg-card);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.25rem;
+        border-top: 1px solid var(--border);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+        overflow-y: auto;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .dropdown {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        box-shadow: none;
+        border: none;
+        background-color: var(--bg-secondary);
+        width: 100%;
+        margin-top: 0.5rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .dropdown-link {
+        text-align: center;
+      }
+
+      [dir="rtl"] .dropdown {
+        right: auto;
+        transform: none;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    img, svg, video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero-custom { padding: 4rem 1.25rem 3rem 1.25rem; min-height: auto; }
+      .hero-custom-content h1 { font-size: 2.25rem; }
+      .vault-cards-grid, .gallery-trio, .quiz-feature-trio, .materials-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .builder-container { padding: 1.25rem; }
+      .section-block { padding: 3.5rem 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-custom-content h1 { font-size: 1.85rem; }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem 2rem 1rem;
+        gap: 2rem;
+      }
+      .footer-base {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+      }
+      .section-block { padding: 2.75rem 1rem; }
+      .nav-container { padding: 0 1rem; }
+      .btn { padding: 0.65rem 1rem; font-size: 0.85rem; }
+    }
+
+    @media (max-width: 320px) {
+      .hero-custom-content h1 { font-size: 1.5rem; }
+      .section-block { padding: 2rem 0.75rem; }
+      .nav-container { padding: 0 0.75rem; }
+      .btn { padding: 0.55rem 0.85rem; font-size: 0.8rem; }
+    }
+  
+    /* --- Smooth Scroll & Entrance Animations --- */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-scale {
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-in-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Micro-Interactions */
+    .split-img-wrapper {
+      overflow: hidden;
+    }
+
+    .split-img-wrapper img, .split-img {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .split-img-wrapper:hover img, .split-img-wrapper:hover .split-img {
+      transform: scale(1.05);
+    }
+
+    .btn {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease !important;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Mobile Header Compact Fix */
+    @media (max-width: 480px) {
+      .nav-actions { gap: 0.35rem !important;   flex-wrap: nowrap !important;
+}
+      .btn#loginBtn, .nav-actions .btn { padding: 0.45rem 0.8rem; font-size: 0.8rem; }
+      .icon-btn, .action-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
+    }
+
+  
+  
+  /* --- Clean Responsive Header Navigation --- */
+  .header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--navbar-bg, rgba(252, 250, 247, 0.92));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.04));
+  }
+
+  .nav-container {
+    max-width: var(--max-width, 1200px);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo span {
+    color: var(--primary);
+  }
+
+  /* Desktop Nav Menu */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1.1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.4rem 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color var(--transition-fast, 0.2s);
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--primary);
+  }
+
+  /* Desktop Nav Actions */
+  .nav-actions {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    flex-wrap: nowrap !important;
+}
+
+  .action-btn, .icon-btn {
+    background: var(--bg-card, #fff);
+    border: 1px solid var(--border);
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: var(--radius-full, 9999px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast, 0.2s), background-color var(--transition-fast, 0.2s), color var(--transition-fast, 0.2s);
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  .action-btn:hover, .icon-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--primary-light, rgba(233, 30, 99, 0.08));
+  }
+
+  /* Mobile Toggle - Hidden on Desktop */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-card, #fff);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full, 9999px);
+    padding: 9px 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .mobile-toggle span {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .mobile-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile Responsive Breakpoint (<= 992px) */
+  @media (max-width: 992px) {
+    .mobile-toggle {
+      display: flex !important;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 60px);
+      background-color: var(--bg-card, #fff);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.5rem 1.25rem;
+      gap: 1.25rem;
+      border-top: 1px solid var(--border);
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s ease;
+      overflow-y: auto;
+      z-index: 999;
+    }
+
+    .nav-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      width: 100%;
+      padding: 0.5rem 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-container { padding: 0 0.85rem; }
+    .nav-actions { gap: 0.35rem !important;   flex-wrap: nowrap !important;
+}
+    .btn#loginBtn, .nav-actions .btn { padding: 0.45rem 0.8rem; font-size: 0.8rem; }
+    .icon-btn, .action-btn, .mobile-toggle { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
+  }
+
+
+    /* --- Master Dark Mode High-Contrast Text Visibility Overrides --- */
+    body.dark {
+      color: var(--text-primary) !important;
+      background-color: var(--bg-primary) !important;
+    }
+
+    body.dark h1,
+    body.dark h2,
+    body.dark h3,
+    body.dark h4,
+    body.dark h5,
+    body.dark h6,
+    body.dark .logo,
+    body.dark .brand-logo-link,
+    body.dark .section-title,
+    body.dark .card-title,
+    body.dark .hero-content h1,
+    body.dark .mobile-drawer-title,
+    body.dark .brand-logo-link span:not(.logo-accent) {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark p,
+    body.dark label,
+    body.dark li,
+    body.dark td,
+    body.dark th,
+    body.dark .form-subtitle,
+    body.dark .section-subtitle,
+    body.dark .brand-desc {
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark a:not(.btn):not(.tag-pill) {
+      color: var(--text-primary);
+    }
+
+    body.dark .nav-link,
+    body.dark .dropdown-link {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark .nav-link:hover,
+    body.dark .dropdown-link:hover {
+      color: var(--primary) !important;
+      background-color: var(--primary-light) !important;
+    }
+
+    body.dark .dropdown,
+    body.dark .info-card,
+    body.dark .product-card,
+    body.dark .bundle-card,
+    body.dark .review-card,
+    body.dark .deal-day-box,
+    body.dark .contact-card,
+    body.dark .login-card,
+    body.dark .auth-card,
+    body.dark .modal-content,
+    body.dark .faq-item,
+    body.dark .step-card,
+    body.dark .harvest-card,
+    body.dark .sensory-item,
+    body.dark .care-card,
+    body.dark .custom-card {
+      background-color: var(--bg-card) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border) !important;
+    }
+
+    body.dark input,
+    body.dark textarea,
+    body.dark select {
+      background-color: var(--bg-secondary) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border) !important;
+    }
+
+    body.dark input::placeholder,
+    body.dark textarea::placeholder {
+      color: var(--text-muted) !important;
+    }
+
+    body.dark .icon-btn,
+    body.dark .action-btn,
+    body.dark .mobile-toggle {
+      background-color: var(--bg-card) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border) !important;
+    }
+
+    body.dark .icon-btn:hover,
+    body.dark .action-btn:hover {
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+      background-color: var(--primary-light) !important;
+    }
+
+    body.dark footer {
+      background-color: var(--footer-bg) !important;
+      color: var(--footer-text) !important;
+      border-color: var(--footer-border) !important;
+    }
+
+    body.dark footer h4,
+    body.dark footer .footer-title {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark footer a {
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark footer a:hover {
+      color: var(--primary) !important;
+    }
+
+  
+    /* ==========================================================================
+       MASTER FULL-SPECTRUM RESPONSIVE & ACCESSIBILITY FRAMEWORK (320px to 1440px+)
+       ========================================================================== */
+
+    /* 1. Global Box Model & Zero Overflow Guarantee */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    img, video, iframe, svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* 2. Touch Target Ergonomics */
+    button, .btn, .icon-btn, .action-btn, a.btn {
+      min-height: 40px;
+      touch-action: manipulation;
+    }
+
+    /* 3. Fluid Responsive Typography Clamp Scale */
+    h1, .hero-content h1 {
+      font-size: clamp(1.75rem, 4.5vw, 3.5rem) !important;
+      line-height: 1.18 !important;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    h2, .section-title, .card-header h2 {
+      font-size: clamp(1.45rem, 3.2vw, 2.35rem) !important;
+      line-height: 1.25 !important;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    h3, .card-title {
+      font-size: clamp(1.15rem, 2.2vw, 1.65rem) !important;
+      line-height: 1.3 !important;
+      word-wrap: break-word;
+    }
+
+    p, body, input, textarea, select, label {
+      font-size: clamp(0.875rem, 1.2vw, 1.05rem);
+      line-height: 1.6;
+    }
+
+    /* 4. Layout Container Scaling */
+    .container, .nav-container, .footer-grid {
+      width: 100% !important;
+      max-width: var(--max-width, 1200px);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: clamp(0.85rem, 3vw, 1.5rem);
+      padding-right: clamp(0.85rem, 3vw, 1.5rem);
+    }
+
+    /* 5. Responsive Grid & Breakpoint Adaptations */
+
+    /* --- Mobile (320px - 480px) --- */
+    @media (max-width: 480px) {
+      .hero-fullscreen, .hero-content {
+        padding: 2rem 1rem !important;
+        min-height: auto !important;
+      }
+      .hero-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+      }
+      .hero-actions .btn, .hero-actions a {
+        width: 100% !important;
+      }
+      .cards-trio, .footer-grid, .grid-split, .grid-split.reversed {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      .info-card, .product-card, .bundle-card, .review-card, .login-card, .auth-card {
+        padding: 1.25rem !important;
+        width: 100% !important;
+      }
+      .nav-actions {
+        gap: 0.3rem !important;
+        flex-wrap: nowrap !important;
+      }
+      .btn#loginBtn, .nav-actions .btn {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 0.8rem !important;
+      }
+      .icon-btn, .action-btn {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
+      }
+      form input, form textarea, form select {
+        width: 100% !important;
+      }
+    }
+
+    /* --- Small Tablet / Large Mobile (481px - 768px) --- */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .cards-trio {
+        grid-template-columns: 1fr !important;
+        gap: 1.75rem !important;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+      }
+      .grid-split, .grid-split.reversed {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+    }
+
+    /* --- Tablet (769px - 1024px) --- */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .cards-trio {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.75rem !important;
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2.25rem !important;
+      }
+      .grid-split, .grid-split.reversed {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+      }
+    }
+
+    /* --- Desktop (>= 1025px) --- */
+    @media (min-width: 1025px) {
+      .mobile-toggle {
+        display: none !important;
+      }
+      .nav-menu {
+        display: flex !important;
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        flex-direction: row !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        width: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+      }
+    }
+
+  
+    /* ==========================================================================
+       MODERN REUSABLE HEADER & RIGHT-SIDE HAMBURGER NAVIGATION DRAWER SYSTEM
+       ========================================================================== */
+
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: var(--navbar-bg, rgba(252, 250, 247, 0.92));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.04));
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .nav-container {
+      max-width: var(--max-width, 1200px);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      text-decoration: none;
+      flex-shrink: 0;
+      font-family: var(--font-heading, serif);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    /* Desktop Navigation Styling (> 992px) */
+    @media (min-width: 993px) {
+      .desktop-only-menu { display: flex !important; }
+      .desktop-only-actions { display: flex !important; }
+      .mobile-toggle { display: none !important; }
+    }
+
+    @media (max-width: 992px) {
+      .desktop-only-menu { display: none !important; }
+      .desktop-only-actions { display: none !important; }
+      .mobile-toggle { display: flex !important; }
+    }
+
+    .desktop-only-menu {
+      align-items: center;
+      list-style: none;
+      gap: 1.1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .desktop-only-menu .nav-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 0.4rem 0.2rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .desktop-only-menu .nav-link:hover,
+    .desktop-only-menu .nav-link.active {
+      color: var(--primary);
+    }
+
+    .desktop-only-actions {
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      flex-wrap: nowrap !important;
+    }
+
+    /* Hamburger Icon (3-Line -> X Transformation) */
+    .mobile-toggle {
+      flex-direction: column;
+      justify-content: space-between;
+      width: 38px;
+      height: 38px;
+      background: var(--bg-card, #ffffff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full, 9999px);
+      padding: 9px 8px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.04));
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .mobile-toggle span {
+      height: 2px;
+      width: 100%;
+      background-color: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      transform-origin: center;
+    }
+
+    .mobile-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .mobile-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Backdrop Overlay */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Right-Side Navigation Drawer (80% screen width) */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 320px;
+      max-width: 82vw;
+      height: 100vh;
+      background-color: var(--bg-card, #ffffff);
+      color: var(--text-primary);
+      z-index: 1002;
+      box-shadow: -6px 0 30px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+    }
+
+    [dir="rtl"] .mobile-drawer {
+      right: auto;
+      left: 0;
+      transform: translateX(-100%);
+      box-shadow: 6px 0 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .mobile-drawer.active {
+      transform: translateX(0) !important;
+    }
+
+    /* Drawer Header */
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.25rem 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      font-family: var(--font-heading, serif);
+    }
+
+    .drawer-logo span {
+      color: var(--primary);
+    }
+
+    .drawer-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      line-height: 1;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm, 6px);
+      transition: color 0.2s ease;
+    }
+
+    .drawer-close-btn:hover {
+      color: var(--primary);
+    }
+
+    /* Drawer Menu Body */
+    .drawer-body {
+      flex: 1;
+      padding: 1rem 1.25rem;
+    }
+
+    .drawer-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0.85rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-radius: var(--radius-md, 10px);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .drawer-link:hover, .drawer-link.active {
+      background-color: var(--primary-light, rgba(233, 30, 99, 0.08));
+      color: var(--primary);
+    }
+
+    .link-icon {
+      font-size: 1.1rem;
+      width: 24px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* Drawer Footer Controls */
+    .drawer-footer {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      background-color: var(--bg-secondary, #f8f9fa);
+    }
+
+    .drawer-toggles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .drawer-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 0.5rem;
+      background-color: var(--bg-card, #ffffff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 8px);
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .drawer-toggle-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .drawer-login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background-color: var(--primary);
+      color: #ffffff !important;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: var(--radius-full, 9999px);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.08));
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .drawer-login-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+  
+    /* Desktop Dropdown Menu */
+    .nav-item {
+      position: relative;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-card, #ffffff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 10px);
+      box-shadow: var(--shadow-lg, 0 10px 30px rgba(0,0,0,0.12));
+      min-width: 140px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      padding: 0.4rem 0;
+      z-index: 1100;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .dropdown-link:hover, .dropdown-link.active {
+      background-color: var(--primary-light, rgba(233, 30, 99, 0.08));
+      color: var(--primary);
+    }
+
+  
+    /* --- Enhanced Visible Active Navbar Indicators --- */
+    .nav-link.active {
+      color: var(--primary) !important;
+      font-weight: 700 !important;
+      position: relative;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 9999px;
+    }
+
+    .dropdown-link.active {
+      background-color: var(--primary-light, rgba(233, 30, 99, 0.12)) !important;
+      color: var(--primary) !important;
+      font-weight: 700 !important;
+    }
+
+    .drawer-link.active {
+      background-color: var(--primary-light, rgba(233, 30, 99, 0.12)) !important;
+      color: var(--primary) !important;
+      font-weight: 700 !important;
+      border-left: 4px solid var(--primary) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    [dir="rtl"] .drawer-link.active {
+      border-left: none !important;
+      border-right: 4px solid var(--primary) !important;
+      padding-right: 0.95rem !important;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+        <!-- --- Fixed Sticky Navigation Bar --- -->
+  <header class="header-nav">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="logo" id="brandLogo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:28px; height:28px; stroke:var(--primary);">
+          <path d="M12 22a8 8 0 0 0 8-8c0-5.5-8-12-8-12S4 8.5 4 14a8 8 0 0 0 8 8z" />
+          <path d="M12 6c-2 2-3 4-3 6 0 3 2.5 5 3 5s3-2 3-5c0-2-1-4-3-6z" fill="var(--primary)" fill-opacity="0.2"/>
+        </svg>
+        Flora<span>Lux</span>
+      </a>
+
+      <!-- Desktop Navigation Menu Links with Home Dropdown -->
+      <ul class="nav-menu desktop-only-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home <span style="font-size:10px; margin-left:2px;">▾</span></a>
+          <div class="dropdown">
+            <a href="index.html" class="dropdown-link">Home 1</a>
+            <a href="home2.html" class="dropdown-link">Home 2</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+        <li class="nav-item"><a href="product.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="sameday-delivery.html" class="nav-link">Same-Day Delivery</a></li>
+        <li class="nav-item"><a href="custom-arrangement.html" class="nav-link active">Custom Arrangement</a></li>
+        <li class="nav-item"><a href="bulk-orders.html" class="nav-link">Bulk Orders</a></li>
+        <li class="nav-item"><a href="offers.html" class="nav-link">Offers</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Desktop Action Controls with Dark Mode & RTL Icons -->
+      <div class="nav-actions desktop-only-actions">
+        <button class="action-btn icon-btn" id="btn-rtl-toggle" aria-label="Toggle LTR/RTL Layout" title="Switch layout direction">
+          <span style="font-size: 14px; font-weight: 700; line-height: 1;">⇄</span>
+        </button>
+        <button class="icon-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle light/dark theme">
+          <svg id="themeIcon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">
+            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+          </svg>
+        </button>
+        <a href="login.html" class="btn" id="loginBtn">Login</a>
+      </div>
+
+      <!-- Mobile Hamburger Icon (Right Side Header) -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Overlay Backdrop -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Right-Side Mobile Navigation Drawer -->
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation menu">
+    <div class="drawer-header">
+      <div class="drawer-logo">Flora<span>Lux</span></div>
+      <button class="drawer-close-btn" id="mobileCloseBtn" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="drawer-body">
+      <ul class="drawer-menu">
+        <li><a href="index.html" class="drawer-link">Home 1</a></li>
+        <li><a href="home2.html" class="drawer-link">Home 2</a></li>
+        <li><a href="about.html" class="drawer-link">About Us</a></li>
+        <li><a href="product.html" class="drawer-link">Products</a></li>
+        <li><a href="sameday-delivery.html" class="drawer-link">Same-Day Delivery</a></li>
+        <li><a href="custom-arrangement.html" class="drawer-link active">Custom Arrangement</a></li>
+        <li><a href="bulk-orders.html" class="drawer-link">Bulk Orders</a></li>
+        <li><a href="offers.html" class="drawer-link">Offers</a></li>
+        <li><a href="contact.html" class="drawer-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="drawer-footer">
+      <div class="drawer-toggles">
+        <button class="drawer-toggle-btn" id="themeToggleMobile">
+          <span id="themeToggleIconMobile">🌙</span>
+          <span id="themeToggleTextMobile">Dark Mode</span>
+        </button>
+        <button class="drawer-toggle-btn" id="rtlToggleMobile">
+          <span>⇄</span>
+          <span id="rtlToggleTextMobile">RTL / LTR</span>
+        </button>
+      </div>
+      <a href="login.html" class="drawer-login-btn" id="loginBtnMobile">Sign In / Login</a>
+    </div>
+  </aside>
+
+  <!-- --- SECTION 1: Hero Section (Full-Screen Background: images/custom/hero.jpg) --- -->
+  <section id="hero" class="hero-custom">
+    <div class="hero-custom-overlay"></div>
+    <div class="hero-custom-content">
+      <span class="tag-pill" style="background:var(--primary); color:#fff;">Bespoke Spatial Staging</span>
+      <h1>Private Custom Arrangement Studio</h1>
+      <p>Collaborate with senior floral architects to design bespoke living installations tailored to your room geometry, color palette, and event aesthetic.</p>
+      
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="#quiz" class="btn">Start Interactive Style Quiz</a>
+        <a href="#consult" class="btn" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff;">Book 1-on-1 Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 2: Interactive Style Questionnaire (Centered Wizard Card Layout) --- -->
+  <section id="quiz" class="section-block">
+    <div class="container">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 2.5rem auto;">
+        <span class="tag-pill">Design Profiling</span>
+        <h2>Interactive Custom Style Quiz</h2>
+        <p>Select your preferences below to generate an instant bespoke floral proposal.</p>
+      </div>
+
+      <div class="quiz-wizard-card">
+        <div class="quiz-progress">
+          <span>STEP 1 OF 3</span>
+          <span style="color:var(--primary);">Instant Digital Proposal</span>
+        </div>
+
+        <div class="quiz-step-title">1. Select Event Setting or Room Location:</div>
+        <div class="quiz-chip-group">
+          <button class="quiz-chip active">Private Penthouse Residence</button>
+          <button class="quiz-chip">Wedding Gala Foyer</button>
+          <button class="quiz-chip">Boutique Hotel Lobby</button>
+          <button class="quiz-chip">Corporate Executive Suite</button>
+        </div>
+
+        <div class="quiz-step-title">2. Preferred Palette & Tonal Mood:</div>
+        <div class="quiz-chip-group">
+          <button class="quiz-chip active">Alabaster & Soft Blush</button>
+          <button class="quiz-chip">Aubergine & Midnight Noir</button>
+          <button class="quiz-chip">Solar Gold & Honey Amber</button>
+        </div>
+
+        <div class="quiz-step-title">3. Preferred Vessel & Urn Hardware:</div>
+        <div class="quiz-chip-group">
+          <button class="quiz-chip active">Hand-Fired Clay Urn</button>
+          <button class="quiz-chip">Smoked Crystal Glassware</button>
+          <button class="quiz-chip">Italian Carrara Marble Basin</button>
+        </div>
+
+        <button class="btn" id="generateProposalBtn" style="width:100%; margin-top:1rem;">Generate Custom Proposal PDF</button>
+      </div>
+
+      <div class="quiz-feature-trio">
+        <div class="quiz-feature-item">
+          <h3>📐 Tailored Geometry</h3>
+          <p style="font-size:0.85rem;">Engineered to match ceiling heights, room focal axes, and table widths.</p>
+        </div>
+        <div class="quiz-feature-item">
+          <h3>🌸 Peak Blooming Windows</h3>
+          <p style="font-size:0.85rem;">Stems selected to open precisely during your scheduled gala or dinner event.</p>
+        </div>
+        <div class="quiz-feature-item">
+          <h3>💧 Zero-Maintenance Hydration</h3>
+          <p style="font-size:0.85rem;">Equipped with hidden water reservoirs and nutrient gel capsules.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 3: Bespoke 3D Botanical Sketching (Asymmetrical Blueprint Lab Layout) --- -->
+  <section id="sketch" class="section-block alt-bg">
+    <div class="container">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 2.5rem auto;">
+        <span class="tag-pill">Digital Precision</span>
+        <h2>3D Architectural Botanical Blueprint</h2>
+        <p>Before cutting a single stem, our senior design team generates 3D digital renderings of your arrangement.</p>
+      </div>
+
+      <div class="blueprint-grid">
+        <div class="blueprint-canvas-box">
+          <div style="position:absolute; top:1rem; right:1.25rem; font-size:0.75rem; letter-spacing:1px; color:#7ce5ff;">STUDIO CAD v4.2</div>
+          <h3 style="color:#fff; margin-bottom:0.5rem;">Spatial Shadow & Stem CAD</h3>
+          <p style="color:#a0c4e2; font-size:0.85rem; margin-bottom:1.5rem;">3D Vector Stem Angle & Hydration Flow Simulation</p>
+          <div class="blueprint-grid-lines">
+            <img src="./images/3D Architectural Botanical Blueprint.jpg" alt="3D Architectural Blueprint Render" style="border-radius:var(--radius-sm); max-height:280px; margin:0 auto; object-fit:cover;">
+          </div>
+        </div>
+
+        <div class="blueprint-step-list">
+          <div class="blueprint-step-card">
+            <div class="blueprint-step-num">01</div>
+            <div>
+              <h3>Spatial Ratio Analysis</h3>
+              <p style="font-size:0.85rem;">Analyzing room dimensions, table clearance, and sightline obstacles.</p>
+            </div>
+          </div>
+
+          <div class="blueprint-step-card">
+            <div class="blueprint-step-num">02</div>
+            <div>
+              <h3>Lighting & Shadow Mapping</h3>
+              <p style="font-size:0.85rem;">Simulating ambient morning sun and evening chandelier highlights on petal textures.</p>
+            </div>
+          </div>
+
+          <div class="blueprint-step-card">
+            <div class="blueprint-step-num">03</div>
+            <div>
+              <h3>Stem Angle CAD Plotting</h3>
+              <p style="font-size:0.85rem;">Plotting exact 45° and 60° spiral insertions for structural equilibrium.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 4: Rare Stem Reserve Vault (3-Column Card Grid Layout) --- -->
+  <section id="vault" class="section-block">
+    <div class="container">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 1.5rem auto;">
+        <span class="tag-pill">Exclusive Cultivars</span>
+        <h2>Rare Stem Reserve Vault</h2>
+        <p>Custom clients gain exclusive access to our private reserve vault featuring rare imported cultivars.</p>
+      </div>
+
+      <div class="vault-cards-grid">
+        <div class="vault-card">
+          <img src="./images/Japanese Black Ranunculus.jpg" alt="Japanese Black Ranunculus" class="vault-card-img">
+          <div class="vault-card-body">
+            <span class="tag-pill" style="font-size:0.65rem;">Imported Kyoto</span>
+            <h3>Japanese Black Ranunculus</h3>
+            <p style="font-size:0.85rem;">Deep velvet petals with dark charcoal centers and extended 14-day vase life.</p>
+          </div>
+        </div>
+
+        <div class="vault-card">
+          <img src="./images/Ecuadorian Heirloom Rose.jpg" alt="Ecuadorian Heirloom Garden Rose" class="vault-card-img">
+          <div class="vault-card-body">
+            <span class="tag-pill" style="font-size:0.65rem;">Andean Harvest</span>
+            <h3>Ecuadorian Heirloom Rose</h3>
+            <p style="font-size:0.85rem;">Over 90 papery ruffled petals emitting rich honey apricot fragrance notes.</p>
+          </div>
+        </div>
+
+        <div class="vault-card">
+          <img src="./images/Dutch Blue Delphinium.jpg" alt="Dutch Blue Delphinium Spires" class="vault-card-img">
+          <div class="vault-card-body">
+            <span class="tag-pill" style="font-size:0.65rem;">Dutch Greenhouse</span>
+            <h3>Dutch Blue Delphinium</h3>
+            <p style="font-size:0.85rem;">Towering 4-foot cobalt blue spires ideal for grand foyer entrance staging.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 5: Custom Vessel & Urn Material Palette --- -->
+  <section id="vessels" class="section-block alt-bg">
+    <div class="container">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 2.5rem auto;">
+        <span class="tag-pill">Interior Harmony</span>
+        <h2>Custom Vessel & Urn Material Palette</h2>
+        <p>Hand-crafted vessels tailored to match your interior wood grains, stone countertops, and hardware accents.</p>
+      </div>
+
+      <div class="materials-grid">
+        <div class="material-card">
+          <div class="material-icon" style="font-size: 2.25rem; margin-bottom: 0.75rem;">🏺</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Hand-Fired Clay Urns</h3>
+          <p style="font-size:0.875rem; color: var(--text-secondary); line-height: 1.6;">Rough-hewn organic stoneware fired in artisanal kilns for rustic and Mediterranean interiors.</p>
+        </div>
+
+        <div class="material-card">
+          <div class="material-icon" style="font-size: 2.25rem; margin-bottom: 0.75rem;">💎</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Smoked Crystal Vases</h3>
+          <p style="font-size:0.875rem; color: var(--text-secondary); line-height: 1.6;">Mouth-blown charcoal crystal glass designed for contemporary minimalist penthouse dining.</p>
+        </div>
+
+        <div class="material-card">
+          <div class="material-icon" style="font-size: 2.25rem; margin-bottom: 0.75rem;">🏛️</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Carrara Marble Basins</h3>
+          <p style="font-size:0.875rem; color: var(--text-secondary); line-height: 1.6;">Hand-carved Italian white marble for classical ballroom, foyer, and mantel centerpieces.</p>
+        </div>
+
+        <div class="material-card">
+          <div class="material-icon" style="font-size: 2.25rem; margin-bottom: 0.75rem;">✨</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Brass Kenzan Mechanics</h3>
+          <p style="font-size:0.875rem; color: var(--text-secondary); line-height: 1.6;">Heavy solid brass Ikebana pin-frogs providing 100% eco-friendly foam-free stem anchorage.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 3.5rem; position: relative; max-width: 840px; margin-left: auto; margin-right: auto;">
+        <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border); aspect-ratio: 16/9;">
+          <img src="./images/Bespoke Floral Staging.jpg" alt="Custom Vessel & Urn Collection" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="position: absolute; bottom: 1.25rem; left: 1.25rem; background: rgba(12, 16, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-md);">
+          <span>🏺</span> Handcrafted Artisan Vessels & Eco-Mechanics
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 6: Private Florist Consultation Scheduling (Appointment Suite Layout) --- -->
+  <section id="consult" class="section-block">
+    <div class="container">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 2.5rem auto;">
+        <span class="tag-pill">Personalized Guidance</span>
+        <h2>Schedule 1-on-1 Florist Consultation</h2>
+        <p>Book a 30-minute virtual or in-studio design session with Lead Architect Claire Vance.</p>
+      </div>
+
+      <div class="consult-suite-grid">
+        <div class="consult-profile-card">
+          <img src="./images/claire_vance.jpg?v=2" alt="Lead Architect Claire Vance" style="width:100%; border-radius:var(--radius-md); margin-bottom:1.5rem; height:260px; object-fit:cover; object-position:top center;">
+          <span class="tag-pill">Senior Floral Architect</span>
+          <h3>Claire Vance</h3>
+          <p style="font-size:0.875rem; margin-top:0.5rem;">"We treat flowers like living architectural sculptures. Every curve, shadow, and bloom height is calibrated to elevate your room."</p>
+        </div>
+
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm);">
+          <form id="consultForm">
+            <div class="form-group">
+              <label for="consultName">Your Full Name *</label>
+              <input type="text" id="consultName" class="form-control" required placeholder="Jane Doe">
+            </div>
+
+            <div class="form-group">
+              <label for="consultEmail">Email Address *</label>
+              <input type="email" id="consultEmail" class="form-control" required placeholder="jane@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="consultType">Consultation Type *</label>
+              <select id="consultType" class="form-control">
+                <option>In-Studio Visit (San Francisco)</option>
+                <option>Virtual Video Consultation</option>
+                <option>On-Site Residence Audit</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn" style="width:100%; margin-top:1rem;">Book Senior Florist Session</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 7: Custom Portfolio Showcase & Commission Order CTA (3-Gallery Grid + Banner) --- -->
+  <section id="portfolio" class="section-block alt-bg" style="text-align:center;">
+    <div class="container">
+      <span class="tag-pill">Bespoke Gallery</span>
+      <h2>Past Custom Commissions Portfolio</h2>
+      <p style="margin-bottom:2rem; max-width:680px; margin-left:auto; margin-right:auto;">Explore our recent spatial staging projects for luxury penthouses, private estates, and editorial shoots.</p>
+
+      <div class="gallery-trio">
+        <div class="gallery-item">
+          <img src="./images/of1.jpg" alt="Luxury Penthouse Floral Staging">
+        </div>
+        <div class="gallery-item">
+          <img src="./images/of3.jpg" alt="Grand Foyer Entrance Arrangement">
+        </div>
+        <div class="gallery-item">
+          <img src="./images/bg5.jpg" alt="Bespoke Wedding Gala Installation">
+        </div>
+      </div>
+
+      <div style="background:var(--bg-card); border:1px solid var(--primary); border-radius:var(--radius-lg); padding:2.5rem; max-width:800px; margin:0 auto; box-shadow:var(--shadow-md);">
+        <h3>Ready to Commission Your Custom Arrangement?</h3>
+        <p style="margin-bottom:1.5rem;">Collaborate directly with our studio to bring your spatial vision to life with rare stems and custom vessels.</p>
+        <div style="display:flex; gap:1.25rem; justify-content:center; flex-wrap:wrap;">
+          <a href="#quiz" class="btn">Start Custom Style Quiz</a>
+          <a href="product.html" class="btn" style="background:var(--bg-primary); color:var(--primary); border:1px solid var(--primary);">Explore Signature Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22a8 8 0 0 0 8-8c0-5.5-8-12-8-12S4 8.5 4 14a8 8 0 0 0 8 8z" />
+            <path d="M12 6c-2 2-3 4-3 6 0 3 2.5 5 3 5s3-2 3-5c0-2-1-4-3-6z" fill="var(--primary)" fill-opacity="0.2"/>
+          </svg>
+          Flora<span>Lux</span>
+        </a>
+        <p class="brand-desc">Crafting premium custom bouquets and floral designs. Elevate your wedding, birthday, anniversary, or event spaces with fresh, handpicked stems.</p>
+        
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.3c-4.6 0-5.7 3.5-5.7 5.7v1.2H6v4h2.5v12h5v-12h3.8l.5-4z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.22.41a4.87 4.87 0 0 1 1.77 1.15c.5.5.85 1.05 1.15 1.77.16.42.36 1.05.41 2.22.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.22a4.87 4.87 0 0 1-1.15 1.77c-.5.5-1.05.85-1.77 1.15-.42.16-1.05.36-2.22.41-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.22-.41a4.87 4.87 0 0 1-1.77-1.15c-.5-.5-.85-1.05-1.15-1.77-.16-.42-.36-1.05-.41-2.22C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.22.3-.72.65-1.28 1.15-1.77a4.87 4.87 0 0 1 1.77-1.15c.42-.16 1.05-.36 2.22-.41 1.27-.06 1.64-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.16.26-2.92.56a7 7 0 0 0-2.52 1.64 7 7 0 0 0-1.64 2.52c-.3.76-.5 1.64-.56 2.92C0 8.74 0 9.15 0 12s.01 3.26.07 4.54c.06 1.28.26 2.16.56 2.92a7 7 0 0 0 1.64 2.52 7 7 0 0 0 2.52 1.64c.76.3 1.64.5 2.92.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.28-.06 2.16-.26 2.92-.56a7 7 0 0 0 2.52-1.64 7 7 0 0 0 1.64-2.52c.3-.76.5-1.64.56-2.92.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.16-.56-2.92a7 7 0 0 0-1.64-2.52 7 7 0 0 0-2.52-1.64c-.76-.3-1.64-.5-2.92-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.2a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M23.95 4.57a10 10 0 0 1-2.82.775 4.96 4.96 0 0 0 2.16-2.72 9.9 9.9 0 0 1-3.13 1.2 4.93 4.93 0 0 0-8.4 4.48 14 14 0 0 1-10.16-5.15 4.9 4.9 0 0 0 1.525 6.57 4.9 4.9 0 0 1-2.23-.616v.06a4.92 4.92 0 0 0 3.95 4.827 4.9 4.9 0 0 1-2.21.085 4.94 4.94 0 0 0 4.6 3.42 9.9 9.9 0 0 1-6.14 2.12c-.4 0-.8-.02-1.2-.07a13.9 13.9 0 0 0 7.55 2.21c9.05 0 14-7.5 14-14v-.64a10 10 0 0 0 2.46-2.56z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>SHOP COLLECTION</h4>
+        <ul class="footer-col-links">
+          <li><a href="index.html" class="footer-link"><span class="arrow-pref">&rsaquo;</span> Classic Home 1</a></li>
+          <li><a href="home2.html" class="footer-link"><span class="arrow-pref">&rsaquo;</span> Editorial Home 2</a></li>
+          <li><a href="about.html" class="footer-link"><span class="arrow-pref">&rsaquo;</span> About Us</a></li>
+          <li><a href="product.html" class="footer-link"><span class="arrow-pref">&rsaquo;</span> Product Catalog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>CUSTOM DESIGN</h4>
+        <ul class="footer-col-links">
+          <li><a href="#quiz" class="footer-link"><span class="arrow-pref">&rsaquo;</span> Style Questionnaire</a></li>
+          <li><a href="#sketch" class="footer-link"><span class="arrow-pref">&rsaquo;</span> 3D Botanical Blueprints</a></li>
+          <li><a href="#vault" class="footer-link"><span class="arrow-pref">&rsaquo;</span> Rare Stem Reserve</a></li>
+          <li><a href="#consult" class="footer-link"><span class="arrow-pref">&rsaquo;</span> Florist Consultation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col contact-col" id="contact">
+        <h4>CONTACT US</h4>
+        <ul class="contact-info-list-footer">
+          <li>
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            <span>742 Botanical Avenue, San Francisco, CA 94102</span>
+          </li>
+          <li>
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span>hello@floraluxdesign.com</span>
+          </li>
+          <li>
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <span>+1 (555) 787-8769</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-base">
+      <p>&copy; 2026 FloraLux Flower Shop. All rights reserved.</p>
+      <div class="footer-base-links">
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <span>•</span>
+        <a href="#" class="footer-link">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="loginModalOverlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      
+      <div class="modal-header">
+        <h2 id="modalTitle">Welcome Back</h2>
+        <p style="font-size:0.875rem; margin-top:0.25rem; color: var(--text-muted);">Access your floral account settings.</p>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tabLoginBtn">Sign In</button>
+        <button class="modal-tab" id="tabRegisterBtn">Register</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="authForm">
+          <div class="form-group" id="regFieldContainer" style="display:none;">
+            <label for="authName">Full Name *</label>
+            <input type="text" id="authName" class="form-control" placeholder="Jane Doe">
+          </div>
+
+          <div class="form-group">
+            <label for="authEmail">Email Address *</label>
+            <input type="email" id="authEmail" class="form-control" required placeholder="jane@example.com">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label for="authPassword">Password *</label>
+            <input type="password" id="authPassword" class="form-control" required placeholder="••••••••">
+          </div>
+
+          <button type="submit" class="btn" style="width:100%; justify-content: center;" id="authSubmitBtn">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastNotification">
+    <span class="toast-icon">✔</span>
+    <span class="toast-message" id="toastMessage">Success</span>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Intersection Observer Scroll Reveal Animation Engine ---
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const animatableElements = document.querySelectorAll(
+        '.section-block, .split-content, .split-img-wrapper, .tier-card, .dept-card, .bundle-card, .loyalty-card, .timeline-node, .branding-card, .seasonal-card, .event-bundle-card, .hero-bulk-content, .hero-offers-content, .hero-contact-content'
+      );
+
+      animatableElements.forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.style.transitionDelay = `${(index % 3) * 0.12}s`;
+        revealObserver.observe(el);
+      });
+
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      let toastTimeout;
+
+      function showToast(message, isError = false) {
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastMsg.textContent = message;
+        if (isError) {
+          toast.style.backgroundColor = 'var(--primary)';
+          toast.querySelector('.toast-icon').textContent = '⚠';
+        } else {
+          toast.style.backgroundColor = 'var(--accent)';
+          toast.querySelector('.toast-icon').textContent = '✔';
+        }
+        toast.classList.add('active');
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('active');
+        }, 3000);
+      }
+
+      // --- Mobile Drawer Toggle Logic ---
+      const mobileToggle = document.getElementById('mobileToggle');
+      const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      const navMenu = document.getElementById('navMenu');
+
+      function openMobileMenu() {
+        if (navMenu) navMenu.classList.add('active');
+        if (mobileOverlay) mobileOverlay.classList.add('active');
+        if (mobileToggle) mobileToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        if (navMenu) navMenu.classList.remove('active');
+        if (mobileOverlay) mobileOverlay.classList.remove('active');
+        if (mobileToggle) mobileToggle.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (navMenu && navMenu.classList.contains('active')) {
+            closeMobileMenu();
+          } else {
+            openMobileMenu();
+          }
+        });
+      }
+
+      if (mobileCloseBtn) {
+        mobileCloseBtn.addEventListener('click', closeMobileMenu);
+      }
+
+      if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+      }
+
+      // Auto-close drawer on link click
+      document.querySelectorAll('.nav-menu a, .dropdown-link').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      // --- Theme Toggle (Desktop & Mobile Sync) ---
+      const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
+      const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
+
+      function applyTheme(isDark) {
+        const themeIcon = document.getElementById('themeIcon');
+        const themeIconMobile = document.getElementById('themeIconMobile');
+        const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
+
+        if (isDark) {
+          document.body.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.body.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+
+        if (themeIcon) themeIcon.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+      }
+
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
+
+      const themeToggleDesktop = document.getElementById('themeToggle');
+      const themeToggleMobile = document.getElementById('themeToggle-mobile');
+
+      function handleThemeToggle() {
+        const isDark = document.body.classList.contains('dark');
+        applyTheme(!isDark);
+      }
+
+      if (themeToggleDesktop) themeToggleDesktop.addEventListener('click', handleThemeToggle);
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', handleThemeToggle);
+
+      // --- RTL Toggle (Desktop & Mobile Sync) ---
+      const rtlToggleDesktop = (document.getElementById('btn-rtl-toggle') || document.getElementById('rtlToggle'));
+      const rtlToggleMobile = document.getElementById('btn-rtl-toggle-mobile');
+
+      function handleRTLToggle() {
+        const currentDir = document.documentElement.getAttribute('dir');
+        if (currentDir === 'rtl') {
+          document.documentElement.setAttribute('dir', 'ltr');
+          document.documentElement.setAttribute('lang', 'en');
+        } else {
+          document.documentElement.setAttribute('dir', 'rtl');
+          document.documentElement.setAttribute('lang', 'ar');
+        }
+      }
+
+      if (rtlToggleDesktop) rtlToggleDesktop.addEventListener('click', handleRTLToggle);
+      if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', handleRTLToggle);
+
+      // Auth Modal
+      const loginBtn = document.getElementById('loginBtn');
+      const loginModalOverlay = document.getElementById('loginModalOverlay');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const authForm = document.getElementById('authForm');
+      
+      const tabLoginBtn = document.getElementById('tabLoginBtn');
+      const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+      const regFieldContainer = document.getElementById('regFieldContainer');
+      const authSubmitBtn = document.getElementById('authSubmitBtn');
+      const modalTitle = document.getElementById('modalTitle');
+
+      let isRegister = false;
+
+      function openModal() {
+        loginModalOverlay.classList.add('active');
+      }
+
+      function closeModal() {
+        loginModalOverlay.classList.remove('active');
+        authForm.reset();
+      }
+
+      function toggleAuthTab(registerActive) {
+        isRegister = registerActive;
+        if (registerActive) {
+          tabRegisterBtn.classList.add('active');
+          tabLoginBtn.classList.remove('active');
+          regFieldContainer.style.display = 'flex';
+          authSubmitBtn.textContent = 'Register Account';
+          modalTitle.textContent = 'Create Account';
+          document.getElementById('authName').required = true;
+        } else {
+          tabLoginBtn.classList.add('active');
+          tabRegisterBtn.classList.remove('active');
+          regFieldContainer.style.display = 'none';
+          authSubmitBtn.textContent = 'Sign In';
+          modalTitle.textContent = 'Welcome Back';
+          document.getElementById('authName').required = false;
+        }
+      }
+
+      // Check active user session
+      const userSessionData = localStorage.getItem('floraLuxUser');
+      if (userSessionData && loginBtn) {
+        try {
+          const user = JSON.parse(userSessionData);
+          if (user && user.isLoggedIn) {
+            loginBtn.textContent = user.name ? `Account (${user.name})` : 'VIP Account';
+            loginBtn.title = `Logged in as ${user.email || user.name}`;
+          }
+        } catch (e) {}
+      }
+
+      if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+      if (loginModalOverlay) {
+        loginModalOverlay.addEventListener('click', (e) => {
+          if (e.target === loginModalOverlay) closeModal();
+        });
+      }
+
+      if (tabLoginBtn) tabLoginBtn.addEventListener('click', () => toggleAuthTab(false));
+      if (tabRegisterBtn) tabRegisterBtn.addEventListener('click', () => toggleAuthTab(true));
+
+      if (authForm) {
+        authForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('authEmail').value;
+          let userName = 'VIP Member';
+          if (isRegister) {
+            userName = document.getElementById('authName').value || 'VIP Member';
+          } else {
+            userName = email.split('@')[0] || 'VIP Member';
+          }
+          localStorage.setItem('floraLuxUser', JSON.stringify({ email, name: userName, isLoggedIn: true }));
+          showToast(`Welcome, ${userName}!`);
+          loginBtn.textContent = `Account (${userName})`;
+          closeModal();
+        });
+      }
+
+    });
+  </script>
+<script>
+  /* --- Universal Header & Right-Side Drawer Interaction Manager --- */
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
+    function openDrawer() {
+      if (mobileDrawer) mobileDrawer.classList.add('active');
+      if (mobileOverlay) mobileOverlay.classList.add('active');
+      if (mobileToggle) mobileToggle.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      if (mobileDrawer) mobileDrawer.classList.remove('active');
+      if (mobileOverlay) mobileOverlay.classList.remove('active');
+      if (mobileToggle) mobileToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileDrawer && mobileDrawer.classList.contains('active')) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+    }
+
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeDrawer);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeDrawer);
+
+    document.querySelectorAll('.drawer-link, .drawer-login-btn').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Theme Toggle Handler (Desktop & Mobile Drawer Sync)
+    const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
+    const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
+
+    function applyTheme(isDark) {
+      const themeIcon = document.getElementById('themeIcon');
+      const themeTextMobile = document.getElementById('themeToggleTextMobile');
+
+      if (isDark) {
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        if (themeIcon) themeIcon.innerHTML = `<path d="${sunPath}" />`;
+        if (themeTextMobile) themeTextMobile.textContent = 'Light Mode';
+      } else {
+        document.body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        if (themeIcon) themeIcon.innerHTML = `<path d="${moonPath}" />`;
+        if (themeTextMobile) themeTextMobile.textContent = 'Dark Mode';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(savedTheme === 'dark' || (!savedTheme && prefersDark));
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    if (themeToggle) themeToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
+    if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
+
+    // RTL Toggle Handler (Desktop & Mobile Sync)
+    function applyRTL(isRTL) {
+      if (isRTL) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+        localStorage.setItem('dir', 'rtl');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+        localStorage.setItem('dir', 'ltr');
+      }
+    }
+
+    const savedDir = localStorage.getItem('dir');
+    applyRTL(savedDir === 'rtl');
+
+    const rtlToggle = document.getElementById('btn-rtl-toggle') || document.getElementById('rtlToggle');
+    const rtlToggleMobile = document.getElementById('rtlToggleMobile');
+    const handleRTL = () => applyRTL(document.documentElement.getAttribute('dir') !== 'rtl');
+    if (rtlToggle) rtlToggle.addEventListener('click', handleRTL);
+    if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', handleRTL);
+
+    // Active User Session Update
+    
+    // --- Automatic Active Navbar Link Highlighter ---
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+    document.querySelectorAll('.desktop-only-menu .nav-link, .dropdown-link, .drawer-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && (href === currentPath || (currentPath === '' && href === 'index.html'))) {
+        link.classList.add('active');
+        if (link.classList.contains('dropdown-link')) {
+          const parentItem = link.closest('.nav-item');
+          if (parentItem) {
+            const parentNavLink = parentItem.querySelector('.nav-link');
+            if (parentNavLink) parentNavLink.classList.add('active');
+          }
+        }
+      }
+    });
+
+    const userSession = localStorage.getItem('floraLuxUser');
+    if (userSession) {
+      try {
+        const u = JSON.parse(userSession);
+        if (u.name) {
+          const lDesktop = document.getElementById('loginBtn');
+          const lMobile = document.getElementById('loginBtnMobile');
+          if (lDesktop) lDesktop.textContent = `Account (${u.name})`;
+          if (lMobile) lMobile.textContent = `Account (${u.name})`;
+        }
+      } catch(e) {}
+    }
+  });
+</script>
+</body>
+</html>
