@@ -6,8 +6,21 @@
   <title>FloraLux | Enterprise Wholesale Bulk Flower Supply & Event Logistics</title>
   <meta name="description" content="FloraLux Wholesale Bulk Flower Orders. Interactive volume discount calculator, wedding & birthday bundles, cold-chain stepper pipeline, branded packaging accordion, and enterprise net-30 terms.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="favicon.svg">
-  
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+      const savedDir = localStorage.getItem('dir');
+      if (savedDir === 'rtl') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      }
+    })();
+  </script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
@@ -65,7 +78,7 @@
     }
 
     /* Dark Theme Variables */
-    body.dark {
+    html.dark, body.dark {
       --bg-primary: hsl(210, 25%, 7%);
       --bg-secondary: hsl(210, 25%, 11%);
       --bg-card: hsl(210, 25%, 13%);
@@ -142,7 +155,7 @@
     }
 
     h3 {
-      font-family: var(--font-body);
+      font-family: var(--font-heading);
       color: var(--text-primary);
       font-weight: 600;
       font-size: var(--font-size-h3);
@@ -293,28 +306,35 @@
       align-items: center;
       gap: 0.6rem;
       flex-shrink: 0;
-  flex-wrap: nowrap !important;
-}
+      flex-wrap: nowrap !important;
+    }
 
     .action-btn, .icon-btn {
-      background: none;
+      background-color: var(--bg-secondary);
       border: 1px solid var(--border);
       width: 38px;
       height: 38px;
-      border-radius: var(--radius-full);
-      display: flex;
+      min-width: 38px;
+      min-height: 38px;
+      border-radius: 50% !important;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--text-secondary);
-      transition: border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+      color: var(--text-primary);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       flex-shrink: 0;
+      line-height: 1;
+      padding: 0;
     }
 
-    .icon-btn:hover {
+    .icon-btn:hover, .action-btn:hover {
       border-color: var(--primary);
       background-color: var(--primary-light);
       color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .icon-btn svg {
@@ -576,7 +596,7 @@
     .pipeline-map {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 1.5rem;
       margin-top: 3.5rem;
       position: relative;
@@ -591,6 +611,28 @@
       text-align: center;
       position: relative;
       box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .pipeline-node h3 {
+      min-height: 2.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+
+    .pipeline-node p {
+      flex-grow: 1;
+      margin: 0;
+      display: flex;
+      align-items: flex-start;
+      text-align: center;
     }
 
     .pipeline-badge {
@@ -604,6 +646,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 1rem auto;
+      flex-shrink: 0;
     }
 
     /* UNIQUE SECTION 4: Expandable Accordion Showcase */
@@ -1707,17 +1750,25 @@
       color: var(--primary);
     }
 
-    /* Desktop Navigation Styling (> 992px) */
-    @media (min-width: 993px) {
+    /* Desktop Navigation Styling (> 1024px) */
+    @media (min-width: 1025px) {
       .desktop-only-menu { display: flex !important; }
       .desktop-only-actions { display: flex !important; }
       .mobile-toggle { display: none !important; }
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
       .desktop-only-menu { display: none !important; }
       .desktop-only-actions { display: none !important; }
       .mobile-toggle { display: flex !important; }
+    }
+
+    /* Laptop Compact Menu (1025px to 1280px) */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+      .desktop-only-menu { gap: 0.6rem !important; }
+      .desktop-only-menu .nav-link { font-size: 0.8rem !important; padding: 0.3rem 0.15rem !important; }
+      .nav-actions { gap: 0.4rem !important; }
+      .nav-actions .btn { padding: 0.4rem 0.75rem !important; font-size: 0.8rem !important; }
     }
 
     .desktop-only-menu {
@@ -1981,25 +2032,35 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%);
       background-color: var(--bg-card, #ffffff);
       border: 1px solid var(--border);
       border-radius: var(--radius-md, 10px);
       box-shadow: var(--shadow-lg, 0 10px 30px rgba(0,0,0,0.12));
-      min-width: 140px;
+      min-width: 170px;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-      padding: 0.4rem 0;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 0.5rem 0;
       z-index: 1100;
     }
 
-    .nav-item:hover .dropdown {
+    .dropdown::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 0;
+      right: 0;
+      height: 15px;
+    }
+
+    .nav-item:hover .dropdown,
+    .nav-item:focus-within .dropdown,
+    .nav-item.active .dropdown {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
     }
 
     .dropdown-link {
@@ -2079,8 +2140,8 @@
         <li class="nav-item">
           <a href="index.html" class="nav-link">Home <span style="font-size:10px; margin-left:2px;">▾</span></a>
           <div class="dropdown">
-            <a href="index.html" class="dropdown-link">Home 1</a>
-            <a href="home2.html" class="dropdown-link">Home 2</a>
+            <a href="index.html" class="dropdown-link">Home 1 (Classic)</a>
+            <a href="home2.html" class="dropdown-link">Home 2 (Editorial)</a>
           </div>
         </li>
         <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
@@ -2127,8 +2188,8 @@
 
     <nav class="drawer-body">
       <ul class="drawer-menu">
-        <li><a href="index.html" class="drawer-link">Home 1</a></li>
-        <li><a href="home2.html" class="drawer-link">Home 2</a></li>
+        <li><a href="index.html" class="drawer-link">Home 1 (Classic)</a></li>
+        <li><a href="home2.html" class="drawer-link">Home 2 (Editorial)</a></li>
         <li><a href="about.html" class="drawer-link">About Us</a></li>
         <li><a href="product.html" class="drawer-link">Products</a></li>
         <li><a href="sameday-delivery.html" class="drawer-link">Same-Day Delivery</a></li>
@@ -2847,79 +2908,78 @@
       if (isDark) {
         document.body.classList.add('dark');
         localStorage.setItem('theme', 'dark');
-        if (themeIcon) themeIcon.innerHTML = `<path d="${sunPath}" />`;
-        if (themeTextMobile) themeTextMobile.textContent = 'Light Mode';
-      } else {
-        document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        if (themeIcon) themeIcon.innerHTML = `<path d="${moonPath}" />`;
-        if (themeTextMobile) themeTextMobile.textContent = 'Dark Mode';
-      }
-    }
-
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(savedTheme === 'dark' || (!savedTheme && prefersDark));
-
-    const themeToggle = document.getElementById('themeToggle');
-    const themeToggleMobile = document.getElementById('themeToggleMobile');
-    if (themeToggle) themeToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
-    if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
-
-    // RTL Toggle Handler (Desktop & Mobile Sync)
-    function applyRTL(isRTL) {
-      if (isRTL) {
-        document.documentElement.setAttribute('dir', 'rtl');
-        document.documentElement.setAttribute('lang', 'ar');
-        localStorage.setItem('dir', 'rtl');
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.documentElement.setAttribute('lang', 'en');
-        localStorage.setItem('dir', 'ltr');
-      }
-    }
-
-    const savedDir = localStorage.getItem('dir');
-    applyRTL(savedDir === 'rtl');
-
-    const rtlToggle = document.getElementById('btn-rtl-toggle') || document.getElementById('rtlToggle');
-    const rtlToggleMobile = document.getElementById('rtlToggleMobile');
-    const handleRTL = () => applyRTL(document.documentElement.getAttribute('dir') !== 'rtl');
-    if (rtlToggle) rtlToggle.addEventListener('click', handleRTL);
-    if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', handleRTL);
-
-    // Active User Session Update
-    
-    // --- Automatic Active Navbar Link Highlighter ---
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-
-    document.querySelectorAll('.desktop-only-menu .nav-link, .dropdown-link, .drawer-link').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href && (href === currentPath || (currentPath === '' && href === 'index.html'))) {
-        link.classList.add('active');
-        if (link.classList.contains('dropdown-link')) {
-          const parentItem = link.closest('.nav-item');
-          if (parentItem) {
-            const parentNavLink = parentItem.querySelector('.nav-link');
-            if (parentNavLink) parentNavLink.classList.add('active');
-          }
-        }
-      }
-    });
-
-    const userSession = localStorage.getItem('floraLuxUser');
-    if (userSession) {
-      try {
-        const u = JSON.parse(userSession);
-        if (u.name) {
-          const lDesktop = document.getElementById('loginBtn');
-          const lMobile = document.getElementById('loginBtnMobile');
-          if (lDesktop) lDesktop.textContent = `Account (${u.name})`;
-          if (lMobile) lMobile.textContent = `Account (${u.name})`;
-        }
-      } catch(e) {}
-    }
+    // Theme & RTL handled by Universal Controller below.
   });
 </script>
+
+  <!-- --- Universal Theme & RTL Toggle Manager --- -->
+  <script>
+    (function() {
+      const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
+      const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
+
+      function applyTheme(isDark) {
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.body.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        
+        const themeIcon = document.getElementById('themeIcon');
+        const themeIconMobile = document.getElementById('themeIconMobile');
+        const themeTextMobile = document.getElementById('themeToggleTextMobile');
+        const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
+
+        if (themeIcon) themeIcon.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+        if (themeTextMobile) themeTextMobile.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      }
+
+      function applyRTL(isRTL) {
+        if (isRTL) {
+          document.documentElement.setAttribute('dir', 'rtl');
+          document.documentElement.setAttribute('lang', 'ar');
+          localStorage.setItem('dir', 'rtl');
+        } else {
+          document.documentElement.setAttribute('dir', 'ltr');
+          document.documentElement.setAttribute('lang', 'en');
+          localStorage.setItem('dir', 'ltr');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
+
+        const savedDir = localStorage.getItem('dir');
+        applyRTL(savedDir === 'rtl');
+
+        const themeBtns = document.querySelectorAll('#themeToggle, #themeToggleMobile, #themeToggle-mobile');
+        themeBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentlyDark = document.body.classList.contains('dark') || document.documentElement.classList.contains('dark');
+            applyTheme(!currentlyDark);
+          });
+        });
+
+        const rtlBtns = document.querySelectorAll('#btn-rtl-toggle, #rtlToggle, #rtlToggleMobile, #btn-rtl-toggle-mobile');
+        rtlBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentlyRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            applyRTL(!currentlyRTL);
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

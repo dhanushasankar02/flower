@@ -6,8 +6,21 @@
   <title>FloraLux | Exclusive Offers, Seasonal Deals & Secret Garden Rewards</title>
   <meta name="description" content="FloraLux Exclusive Offers. Deal of the Day, Seasonal Spotlight, Bouquet Bundles, Secret Garden Deals, Reward Your First Order, Flash Sale Countdown, and Unlock Your Surprise.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="favicon.svg">
-  
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+      const savedDir = localStorage.getItem('dir');
+      if (savedDir === 'rtl') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      }
+    })();
+  </script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
@@ -65,7 +78,7 @@
     }
 
     /* Dark Theme Variables */
-    body.dark {
+    html.dark, body.dark {
       --bg-primary: hsl(210, 25%, 7%);
       --bg-secondary: hsl(210, 25%, 11%);
       --bg-card: hsl(210, 25%, 13%);
@@ -142,7 +155,7 @@
     }
 
     h3 {
-      font-family: var(--font-body);
+      font-family: var(--font-heading);
       color: var(--text-primary);
       font-weight: 600;
       font-size: var(--font-size-h3);
@@ -293,28 +306,35 @@
       align-items: center;
       gap: 0.6rem;
       flex-shrink: 0;
-  flex-wrap: nowrap !important;
-}
+      flex-wrap: nowrap !important;
+    }
 
     .action-btn, .icon-btn {
-      background: none;
+      background-color: var(--bg-secondary);
       border: 1px solid var(--border);
       width: 38px;
       height: 38px;
-      border-radius: var(--radius-full);
-      display: flex;
+      min-width: 38px;
+      min-height: 38px;
+      border-radius: 50% !important;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--text-secondary);
-      transition: border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+      color: var(--text-primary);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       flex-shrink: 0;
+      line-height: 1;
+      padding: 0;
     }
 
-    .icon-btn:hover {
+    .icon-btn:hover, .action-btn:hover {
       border-color: var(--primary);
       background-color: var(--primary-light);
       color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .icon-btn svg {
@@ -345,6 +365,145 @@
       background-color: var(--primary-hover);
       transform: translateY(-1px);
       box-shadow: 0 4px 14px var(--primary-light);
+    }
+
+    /* Product Grid & Card Styling for Offers */
+    .home-product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .home-product-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .home-product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .home-product-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .home-product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-smooth);
+    }
+
+    .home-product-card:hover .home-product-img {
+      transform: scale(1.06);
+    }
+
+    .home-product-badge {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      background-color: var(--accent);
+      color: #ffffff;
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    [dir="rtl"] .home-product-badge {
+      left: auto;
+      right: 0.85rem;
+    }
+
+    .home-product-body {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .home-product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .home-rating {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+
+    .home-rating span {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .home-stems {
+      background-color: var(--bg-secondary);
+      color: var(--text-secondary);
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+
+    .home-product-title {
+      font-size: 1.15rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .home-product-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .home-product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 0.85rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .home-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .home-price-original {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .home-price-current {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
     }
 
     .mobile-toggle {
@@ -546,6 +705,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
+      align-items: stretch;
       margin-top: 3rem;
     }
 
@@ -556,6 +716,16 @@
       padding: 2rem;
       text-align: start;
       box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .bundle-card h3 {
+      min-height: 2.4rem;
+      display: flex;
+      align-items: center;
+      width: 100%;
     }
 
     [dir="rtl"] .bundle-card {
@@ -569,6 +739,25 @@
       flex-direction: column;
       gap: 0.6rem;
       font-size: 0.85rem;
+      flex-grow: 1;
+      justify-content: flex-start;
+    }
+
+    .bundle-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0.8rem 0;
+      min-height: 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .bundle-card .btn {
+      margin-top: 0;
+      width: 100%;
     }
 
     /* TOPIC 4: Secret Garden Unlock Box */
@@ -1668,17 +1857,25 @@
       color: var(--primary);
     }
 
-    /* Desktop Navigation Styling (> 992px) */
-    @media (min-width: 993px) {
+    /* Desktop Navigation Styling (> 1024px) */
+    @media (min-width: 1025px) {
       .desktop-only-menu { display: flex !important; }
       .desktop-only-actions { display: flex !important; }
       .mobile-toggle { display: none !important; }
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
       .desktop-only-menu { display: none !important; }
       .desktop-only-actions { display: none !important; }
       .mobile-toggle { display: flex !important; }
+    }
+
+    /* Laptop Compact Menu (1025px to 1280px) */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+      .desktop-only-menu { gap: 0.6rem !important; }
+      .desktop-only-menu .nav-link { font-size: 0.8rem !important; padding: 0.3rem 0.15rem !important; }
+      .nav-actions { gap: 0.4rem !important; }
+      .nav-actions .btn { padding: 0.4rem 0.75rem !important; font-size: 0.8rem !important; }
     }
 
     .desktop-only-menu {
@@ -1942,25 +2139,35 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%);
       background-color: var(--bg-card, #ffffff);
       border: 1px solid var(--border);
       border-radius: var(--radius-md, 10px);
       box-shadow: var(--shadow-lg, 0 10px 30px rgba(0,0,0,0.12));
-      min-width: 140px;
+      min-width: 170px;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-      padding: 0.4rem 0;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 0.5rem 0;
       z-index: 1100;
     }
 
-    .nav-item:hover .dropdown {
+    .dropdown::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 0;
+      right: 0;
+      height: 15px;
+    }
+
+    .nav-item:hover .dropdown,
+    .nav-item:focus-within .dropdown,
+    .nav-item.active .dropdown {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
     }
 
     .dropdown-link {
@@ -2040,8 +2247,8 @@
         <li class="nav-item">
           <a href="index.html" class="nav-link">Home <span style="font-size:10px; margin-left:2px;">▾</span></a>
           <div class="dropdown">
-            <a href="index.html" class="dropdown-link">Home 1</a>
-            <a href="home2.html" class="dropdown-link">Home 2</a>
+            <a href="index.html" class="dropdown-link">Home 1 (Classic)</a>
+            <a href="home2.html" class="dropdown-link">Home 2 (Editorial)</a>
           </div>
         </li>
         <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
@@ -2088,8 +2295,8 @@
 
     <nav class="drawer-body">
       <ul class="drawer-menu">
-        <li><a href="index.html" class="drawer-link">Home 1</a></li>
-        <li><a href="home2.html" class="drawer-link">Home 2</a></li>
+        <li><a href="index.html" class="drawer-link">Home 1 (Classic)</a></li>
+        <li><a href="home2.html" class="drawer-link">Home 2 (Editorial)</a></li>
         <li><a href="about.html" class="drawer-link">About Us</a></li>
         <li><a href="product.html" class="drawer-link">Products</a></li>
         <li><a href="sameday-delivery.html" class="drawer-link">Same-Day Delivery</a></li>
@@ -2136,218 +2343,179 @@
     </div>
   </section>
 
-  <!-- --- TOPIC 1: Deal of the Day (images/offers/deal_of_the_day.jpg) --- -->
-  <section id="deal-of-the-day" class="section-block">
+  <!-- --- SECTION 1: Daily Flash Deals & Product Spotlight --- -->
+  <section id="flash-deals" class="section-block">
     <div class="container">
-      <div class="grid-split">
-        <div class="split-content">
-          <span class="tag-pill">24-Hour Special</span>
-          <h2>Deal of the Day: Royal Empress Peonies (35% OFF)</h2>
-          <p>Highlighting today's featured limited-time floral release: Handpicked Royal Empress Peonies paired with silver dollar eucalyptus in a signature linen wrap.</p>
-          
-          <div class="deal-day-box">
-            <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">TODAY'S SPECIAL PRICE</div>
-            <div style="font-size:2rem; font-weight:700; color:var(--primary); margin:0.25rem 0;">$78.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:1.1rem; font-weight:400;">$120.00</span></div>
-            <p style="font-size:0.825rem; color:var(--accent); font-weight:600;">✔️ Includes free priority metropolitan delivery slot</p>
+      <div style="text-align:center; max-width: 720px; margin: 0 auto 2.5rem auto;">
+        <span class="tag-pill">24-Hour Special Pricing</span>
+        <h2>Today's Featured Flash Deals</h2>
+        <p>Hurry! These special stem prices and discounts reset daily. Order before the countdown expires.</p>
+        
+        <!-- LED Countdown Timer -->
+        <div class="led-countdown-clock" style="margin: 1.25rem auto; justify-content:center;">
+          <div class="led-digit-box">
+            <div class="led-digit-num" id="cntHours">04</div>
+            <div class="led-digit-label">Hours</div>
           </div>
-
-          <a href="product.html" class="btn" style="align-self:flex-start; margin-top:0.5rem;">Claim Today's Deal</a>
-        </div>
-
-        <div class="split-img-wrapper">
-          <img src="./images/of2.jpg" alt="Deal of the Day Royal Empress Peonies" class="split-img">
+          <div class="led-digit-box">
+            <div class="led-digit-num" id="cntMins">32</div>
+            <div class="led-digit-label">Mins</div>
+          </div>
+          <div class="led-digit-box">
+            <div class="led-digit-num" id="cntSecs">15</div>
+            <div class="led-digit-label">Secs</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- --- TOPIC 2: Seasonal Spotlight (images/offers/seasonal_spotlight.jpg) --- -->
-  <section id="seasonal-spotlight" class="section-block alt-bg">
-    <div class="container">
-      <div class="grid-split reversed">
-        <div class="split-content">
-          <span class="tag-pill">Flower Season Discounts</span>
-          <h2>Seasonal Spotlight Offers</h2>
-          <p>Enjoy seasonal pricing based on peak field bloom cycles across fresh stem varieties.</p>
-          
-          <div class="seasonal-grid" style="margin-top:0.5rem; grid-template-columns: repeat(2, 1fr); gap:1rem;">
-            <div class="seasonal-card" style="padding:1rem;">
-              <span class="tag-pill" style="font-size:0.65rem; margin-bottom:0.3rem;">Spring Harvest</span>
-              <h3 style="font-size:1rem;">🌷 Dutch Tulips</h3>
-              <p style="font-size:0.8rem; margin-top:0.25rem;">20% Off all tulip hand-ties.</p>
+      <!-- Flash Deal Product Grid -->
+      <div class="home-product-grid">
+        
+        <!-- Product 1 -->
+        <div class="home-product-card">
+          <div class="home-product-img-wrap">
+            <span class="home-product-badge">35% OFF</span>
+            <img src="images/of2.jpg" alt="Royal Empress Peony Cascade" class="home-product-img">
+          </div>
+          <div class="home-product-body">
+            <div class="home-product-meta">
+              <span class="home-rating">★★★★★ <span>(142)</span></span>
+              <span class="home-stems">24 Stems</span>
             </div>
-
-            <div class="seasonal-card" style="padding:1rem;">
-              <span class="tag-pill" style="font-size:0.65rem; margin-bottom:0.3rem;">Summer Peak</span>
-              <h3 style="font-size:1rem;">🌺 Coral Dahlias</h3>
-              <p style="font-size:0.8rem; margin-top:0.25rem;">Free vase with 2+ bouquet orders.</p>
-            </div>
-
-            <div class="seasonal-card" style="padding:1rem;">
-              <span class="tag-pill" style="font-size:0.65rem; margin-bottom:0.3rem;">Autumn Bloom</span>
-              <h3 style="font-size:1rem;">🍂 Golden Mums</h3>
-              <p style="font-size:0.8rem; margin-top:0.25rem;">15% Off autumn centerpieces.</p>
-            </div>
-
-            <div class="seasonal-card" style="padding:1rem;">
-              <span class="tag-pill" style="font-size:0.65rem; margin-bottom:0.3rem;">Winter Frost</span>
-              <h3 style="font-size:1rem;">❄️ White Rose</h3>
-              <p style="font-size:0.8rem; margin-top:0.25rem;">Pre-order holiday wreath deals.</p>
+            <h3 class="home-product-title">Royal Empress Peony Cascade</h3>
+            <p class="home-product-desc">Handpicked pink Japanese peonies with silver dollar eucalyptus in silk linen wrap.</p>
+            <div class="home-product-footer">
+              <div class="home-price-box">
+                <span class="home-price-original">$120</span>
+                <span class="home-price-current">$78</span>
+              </div>
+              <button class="btn offer-add-btn" data-name="Royal Empress Peony Cascade" data-price="$78">Claim Deal</button>
             </div>
           </div>
         </div>
 
-        <div class="split-img-wrapper">
-          <img src="./images/of1.jpg" alt="Seasonal Spotlight Discounts" class="split-img">
+        <!-- Product 2 -->
+        <div class="home-product-card">
+          <div class="home-product-img-wrap">
+            <span class="home-product-badge" style="background:var(--primary);">25% OFF</span>
+            <img src="images/of1.jpg" alt="Velvet Crimson Rose Bouquet" class="home-product-img">
+          </div>
+          <div class="home-product-body">
+            <div class="home-product-meta">
+              <span class="home-rating">★★★★★ <span>(215)</span></span>
+              <span class="home-stems">18 Stems</span>
+            </div>
+            <h3 class="home-product-title">Velvet Crimson Rose Hand-Tie</h3>
+            <p class="home-product-desc">Deep crimson garden roses hand-bound with organic greenery and gold foil ribbon.</p>
+            <div class="home-product-footer">
+              <div class="home-price-box">
+                <span class="home-price-original">$115</span>
+                <span class="home-price-current">$86</span>
+              </div>
+              <button class="btn offer-add-btn" data-name="Velvet Crimson Rose Hand-Tie" data-price="$86">Claim Deal</button>
+            </div>
+          </div>
         </div>
+
+        <!-- Product 3 -->
+        <div class="home-product-card">
+          <div class="home-product-img-wrap">
+            <span class="home-product-badge" style="background:var(--accent);">20% OFF</span>
+            <img src="images/of3.jpg" alt="Meadowland Wildflower Spray" class="home-product-img">
+          </div>
+          <div class="home-product-body">
+            <div class="home-product-meta">
+              <span class="home-rating">★★★★★ <span>(86)</span></span>
+              <span class="home-stems">30 Stems</span>
+            </div>
+            <h3 class="home-product-title">Meadowland Wildflower Spray</h3>
+            <p class="home-product-desc">Autumn dahlias, lavender sprigs, and organic wheat in terracotta vase.</p>
+            <div class="home-product-footer">
+              <div class="home-price-box">
+                <span class="home-price-original">$98</span>
+                <span class="home-price-current">$78</span>
+              </div>
+              <button class="btn offer-add-btn" data-name="Meadowland Wildflower Spray" data-price="$78">Claim Deal</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- --- TOPIC 3: Bouquet Bundles (images/offers/bouquet_bundles.jpg) --- -->
-  <section id="bouquet-bundles" class="section-block">
+  <!-- --- SECTION 2: Special Bouquet Combo Bundles --- -->
+  <section id="bundles" class="section-block alt-bg">
     <div class="container">
-      <div style="text-align:center; max-width: 680px; margin: 0 auto 1.5rem auto;">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 2.5rem auto;">
         <span class="tag-pill">Combo Packages</span>
-        <h2>Bouquet Bundles: Flowers + Vase + Greeting Card</h2>
-        <p>Save 20% when purchasing complete floral gift sets bundled with handcrafted vases and personalized cards.</p>
+        <h2>Bouquet Bundles: Flowers + Vase + Custom Card</h2>
+        <p>Save 20% when purchasing complete floral gift sets bundled with handcrafted vases and personalized calligraphy cards.</p>
       </div>
 
       <div class="bundles-grid">
+        
         <div class="bundle-card">
-          <span class="tag-pill" style="font-size:0.65rem;">Save 20%</span>
+          <span class="tag-pill" style="font-size:0.65rem;">Save $30</span>
           <h3>🌹 Romance Gift Set</h3>
           <ul class="bundle-checklist">
             <li>✔️ 12 Ecuadorian Red Roses</li>
             <li>✔️ Smoked Glass Crystal Vase</li>
             <li>✔️ Handwritten Calligraphy Card</li>
           </ul>
-          <div style="font-size:1.35rem; font-weight:700; color:var(--primary);">$115.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:0.85rem; font-weight:400;">$145.00</span></div>
-          <button class="btn" style="width:100%; margin-top:1rem;">Add Romance Bundle</button>
+          <div class="bundle-price">$115.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:0.9rem; font-weight:400;">$145.00</span></div>
+          <button class="btn offer-add-btn" data-name="Romance Gift Set Bundle" data-price="$115.00" style="width:100%;">Add Bundle to Cart</button>
         </div>
 
         <div class="bundle-card">
-          <span class="tag-pill" style="font-size:0.65rem;">Save 20%</span>
+          <span class="tag-pill" style="font-size:0.65rem;">Save $25</span>
           <h3>🌿 Botanical Wellness Bundle</h3>
           <ul class="bundle-checklist">
             <li>✔️ Eucalyptus & Lavender Hand-Tie</li>
             <li>✔️ Hand-Fired Clay Urn Vase</li>
             <li>✔️ Botanical Care & Gift Card</li>
           </ul>
-          <div style="font-size:1.35rem; font-weight:700; color:var(--primary);">$95.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:0.85rem; font-weight:400;">$120.00</span></div>
-          <button class="btn" style="width:100%; margin-top:1rem;">Add Wellness Bundle</button>
+          <div class="bundle-price">$95.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:0.9rem; font-weight:400;">$120.00</span></div>
+          <button class="btn offer-add-btn" data-name="Botanical Wellness Bundle" data-price="$95.00" style="width:100%;">Add Bundle to Cart</button>
         </div>
 
         <div class="bundle-card">
-          <span class="tag-pill" style="font-size:0.65rem;">Save 20%</span>
+          <span class="tag-pill" style="font-size:0.65rem;">Save $25</span>
           <h3>🌸 Birthday Celebration Bundle</h3>
           <ul class="bundle-checklist">
             <li>✔️ Seasonal Wildflower Bouquet</li>
             <li>✔️ Brass Kenzan Pin-Frog Vessel</li>
             <li>✔️ Embossed Birthday Card</li>
           </ul>
-          <div style="font-size:1.35rem; font-weight:700; color:var(--primary);">$105.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:0.85rem; font-weight:400;">$130.00</span></div>
-          <button class="btn" style="width:100%; margin-top:1rem;">Add Celebration Bundle</button>
+          <div class="bundle-price">$105.00 <span style="text-decoration:line-through; color:var(--text-muted); font-size:0.9rem; font-weight:400;">$130.00</span></div>
+          <button class="btn offer-add-btn" data-name="Birthday Celebration Bundle" data-price="$105.00" style="width:100%;">Add Bundle to Cart</button>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- --- TOPIC 4: Secret Garden Deals (images/offers/secret_garden.jpg) --- -->
-  <section id="secret-garden" class="section-block alt-bg">
+  <!-- --- SECTION 3: Secret Garden Exclusive Deals & Coupon Rewards --- -->
+  <section id="secret-garden" class="section-block">
     <div class="container">
+      <div style="text-align:center; max-width: 680px; margin: 0 auto 2.5rem auto;">
+        <span class="tag-pill">Rewards & Promo Codes</span>
+        <h2>Unlock Exclusive Secret Garden Discounts</h2>
+        <p>Interactive reward codes and special member privileges for instant extra savings at checkout.</p>
+      </div>
+
       <div class="grid-split">
         <div class="split-content">
-          <span class="tag-pill">Hidden Vault Offers</span>
-          <h2>Secret Garden Deals</h2>
-          <p>Unlock hidden limited offers reserved exclusively for curious botanical enthusiasts.</p>
-          
           <div class="secret-vault-card" style="margin:0; padding:1.75rem;">
             <div style="font-size:2.2rem; margin-bottom:0.25rem;">🗝️</div>
-            <h3 style="font-size:1.25rem;">Unlocked Secret Vault Promo</h3>
-            <p style="color:rgba(255,255,255,0.85); font-size:0.85rem; margin-top:0.25rem;">Use secret code below for 20% off rare cultivars.</p>
+            <h3 style="font-size:1.25rem;">Secret Garden Promo Code</h3>
+            <p style="color:rgba(255,255,255,0.85); font-size:0.85rem; margin-top:0.25rem;">Use secret code below for an extra 20% off rare cultivars.</p>
             <div class="secret-code-display" id="secretCodeBox" style="font-size:1.4rem; padding:0.6rem 1.25rem; margin:1rem 0;">SECRETGARDEN20</div>
-            <br>
-            <button class="btn" id="copySecretBtn" style="background:#ffd700; color:#1f1826;">Copy Secret Code</button>
+            <button class="btn" id="copySecretBtn" style="background:#ffd700; color:#1f1826;">Copy Promo Code</button>
           </div>
         </div>
 
-        <div class="split-img-wrapper">
-          <img src="./images/Our Story.jpg" alt="Secret Garden Deals Vault Key" class="split-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- --- TOPIC 5: First Bloom Privileges (images/offers/first_bloom_welcome.jpg) --- -->
-  <section id="first-order" class="section-block">
-    <div class="container">
-      <div class="grid-split reversed">
         <div class="split-content">
-          <span class="tag-pill">New Customer Welcome Vault</span>
-          <h2>First Bloom Privileges</h2>
-          <p>Inaugural welcome package for new floral connoisseurs: Enjoy <strong>$15 Off Your First Order</strong> plus a complimentary organic sachet & ceramic vase.</p>
-
-          <div class="first-order-box" style="flex-direction:column; align-items:flex-start; gap:1rem; padding:1.75rem;">
-            <div>
-              <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">WELCOME PROMO CODE</div>
-              <div style="font-size:1.8rem; font-weight:700; color:var(--primary); font-family:monospace; margin:0.2rem 0;" id="firstOrderCode">FIRSTBLOOM15</div>
-              <div style="font-size:0.85rem; color:var(--accent); font-weight:600;">✔️ Save $15 + Free Botanical Gift Pack</div>
-            </div>
-            <button class="btn" id="copyFirstOrderBtn">Claim First Bloom Code</button>
-          </div>
-        </div>
-
-        <div class="split-img-wrapper">
-          <img src="./images/bg5.jpg" alt="First Bloom Privileges Welcome Gift Package" class="split-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- --- TOPIC 6: Flash Sale Countdown (images/offers/flash_sale.jpg) --- -->
-  <section id="flash-sale" class="section-block alt-bg">
-    <div class="container">
-      <div class="grid-split">
-        <div class="split-content">
-          <span class="tag-pill">Time-Limited Flash Sale</span>
-          <h2>Rare Coral Dahlias & Orchids Flash Deal</h2>
-          <p>Hurry! These time-limited stem prices reset once the live countdown timer reaches zero.</p>
-
-          <div class="led-countdown-clock" style="margin:0.5rem 0;">
-            <div class="led-digit-box">
-              <div class="led-digit-num" id="cntHours">04</div>
-              <div class="led-digit-label">Hours</div>
-            </div>
-            <div class="led-digit-box">
-              <div class="led-digit-num" id="cntMins">32</div>
-              <div class="led-digit-label">Mins</div>
-            </div>
-            <div class="led-digit-box">
-              <div class="led-digit-num" id="cntSecs">15</div>
-              <div class="led-digit-label">Secs</div>
-            </div>
-          </div>
-
-          <a href="product.html" class="btn" style="align-self:flex-start; margin-top:0.5rem;">Shop Flash Sale Deals</a>
-        </div>
-
-        <div class="split-img-wrapper">
-          <img src="./images/bg2.jpg" alt="Flash Sale Live Countdown Clock" class="split-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- --- TOPIC 7: Unlock Your Surprise (images/offers/unlock_surprise.jpg) --- -->
-  <section id="unlock-surprise" class="section-block">
-    <div class="container">
-      <div class="grid-split reversed">
-        <div class="split-content">
-          <span class="tag-pill">Interactive Reveal</span>
-          <h2>Unlock Your Surprise Discount</h2>
-          <p>Click on the mystery botanical gift box below to reveal your secret randomized discount (15% – 40% OFF)!</p>
-
           <div class="surprise-reveal-box" style="margin:0; padding:1.75rem;">
             <div class="mystery-gift-icon" id="mysteryBoxIcon">🎁</div>
             <h3 id="surpriseTitle" style="margin-top:0.75rem; font-size:1.25rem;">Click Box to Reveal Your Surprise!</h3>
@@ -2358,6 +2526,9 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
         <div class="split-img-wrapper">
           <img src="./images/custom_florist.jpg" alt="Unlock Your Surprise Mystery Box" class="split-img">
@@ -2589,6 +2760,15 @@
         link.addEventListener('click', closeMobileMenu);
       });
 
+      // --- Offer Add to Cart Handler ---
+      document.querySelectorAll('.offer-add-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-name');
+          const price = btn.getAttribute('data-price');
+          showToast(`Added ${name} (${price}) to cart!`);
+        });
+      });
+
       // --- Theme Toggle (Desktop & Mobile Sync) ---
       const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
       const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
@@ -2766,90 +2946,78 @@
       link.addEventListener('click', closeDrawer);
     });
 
-    // Theme Toggle Handler (Desktop & Mobile Drawer Sync)
-    const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
-    const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
-
-    function applyTheme(isDark) {
-      const themeIcon = document.getElementById('themeIcon');
-      const themeTextMobile = document.getElementById('themeToggleTextMobile');
-
-      if (isDark) {
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        if (themeIcon) themeIcon.innerHTML = `<path d="${sunPath}" />`;
-        if (themeTextMobile) themeTextMobile.textContent = 'Light Mode';
-      } else {
-        document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        if (themeIcon) themeIcon.innerHTML = `<path d="${moonPath}" />`;
-        if (themeTextMobile) themeTextMobile.textContent = 'Dark Mode';
-      }
-    }
-
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(savedTheme === 'dark' || (!savedTheme && prefersDark));
-
-    const themeToggle = document.getElementById('themeToggle');
-    const themeToggleMobile = document.getElementById('themeToggleMobile');
-    if (themeToggle) themeToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
-    if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
-
-    // RTL Toggle Handler (Desktop & Mobile Sync)
-    function applyRTL(isRTL) {
-      if (isRTL) {
-        document.documentElement.setAttribute('dir', 'rtl');
-        document.documentElement.setAttribute('lang', 'ar');
-        localStorage.setItem('dir', 'rtl');
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.documentElement.setAttribute('lang', 'en');
-        localStorage.setItem('dir', 'ltr');
-      }
-    }
-
-    const savedDir = localStorage.getItem('dir');
-    applyRTL(savedDir === 'rtl');
-
-    const rtlToggle = document.getElementById('btn-rtl-toggle') || document.getElementById('rtlToggle');
-    const rtlToggleMobile = document.getElementById('rtlToggleMobile');
-    const handleRTL = () => applyRTL(document.documentElement.getAttribute('dir') !== 'rtl');
-    if (rtlToggle) rtlToggle.addEventListener('click', handleRTL);
-    if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', handleRTL);
-
-    // Active User Session Update
-    
-    // --- Automatic Active Navbar Link Highlighter ---
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-
-    document.querySelectorAll('.desktop-only-menu .nav-link, .dropdown-link, .drawer-link').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href && (href === currentPath || (currentPath === '' && href === 'index.html'))) {
-        link.classList.add('active');
-        if (link.classList.contains('dropdown-link')) {
-          const parentItem = link.closest('.nav-item');
-          if (parentItem) {
-            const parentNavLink = parentItem.querySelector('.nav-link');
-            if (parentNavLink) parentNavLink.classList.add('active');
-          }
-        }
-      }
-    });
-
-    const userSession = localStorage.getItem('floraLuxUser');
-    if (userSession) {
-      try {
-        const u = JSON.parse(userSession);
-        if (u.name) {
-          const lDesktop = document.getElementById('loginBtn');
-          const lMobile = document.getElementById('loginBtnMobile');
-          if (lDesktop) lDesktop.textContent = `Account (${u.name})`;
-          if (lMobile) lMobile.textContent = `Account (${u.name})`;
-        }
-      } catch(e) {}
-    }
+    // Theme & RTL handled by Universal Controller below.
   });
 </script>
+
+  <!-- --- Universal Theme & RTL Toggle Manager --- -->
+  <script>
+    (function() {
+      const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
+      const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
+
+      function applyTheme(isDark) {
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.body.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        
+        const themeIcon = document.getElementById('themeIcon');
+        const themeIconMobile = document.getElementById('themeIconMobile');
+        const themeTextMobile = document.getElementById('themeToggleTextMobile');
+        const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
+
+        if (themeIcon) themeIcon.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+        if (themeTextMobile) themeTextMobile.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      }
+
+      function applyRTL(isRTL) {
+        if (isRTL) {
+          document.documentElement.setAttribute('dir', 'rtl');
+          document.documentElement.setAttribute('lang', 'ar');
+          localStorage.setItem('dir', 'rtl');
+        } else {
+          document.documentElement.setAttribute('dir', 'ltr');
+          document.documentElement.setAttribute('lang', 'en');
+          localStorage.setItem('dir', 'ltr');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
+
+        const savedDir = localStorage.getItem('dir');
+        applyRTL(savedDir === 'rtl');
+
+        const themeBtns = document.querySelectorAll('#themeToggle, #themeToggleMobile, #themeToggle-mobile');
+        themeBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentlyDark = document.body.classList.contains('dark') || document.documentElement.classList.contains('dark');
+            applyTheme(!currentlyDark);
+          });
+        });
+
+        const rtlBtns = document.querySelectorAll('#btn-rtl-toggle, #rtlToggle, #rtlToggleMobile, #btn-rtl-toggle-mobile');
+        rtlBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentlyRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            applyRTL(!currentlyRTL);
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

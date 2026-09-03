@@ -6,8 +6,21 @@
   <title>FloraLux | VIP Member Sign In & Sign Up Portal</title>
   <meta name="description" content="FloraLux VIP Member Sign In and Sign Up Portal. Access saved address vaults, live order tracking, Petal Rewards points, and account settings.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="favicon.svg">
-  
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+      const savedDir = localStorage.getItem('dir');
+      if (savedDir === 'rtl') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      }
+    })();
+  </script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
@@ -48,7 +61,7 @@
     }
 
     /* Dark Theme Variables */
-    body.dark {
+    html.dark, body.dark {
       --bg-primary: hsl(210, 25%, 7%);
       --bg-secondary: hsl(210, 25%, 11%);
       --bg-card: hsl(210, 25%, 13%);
@@ -107,34 +120,36 @@
     }
 
     .action-btn, .icon-btn {
-      background: var(--bg-card);
+      background-color: var(--bg-secondary);
       border: 1px solid var(--border);
-      width: 42px;
-      height: 42px;
-      border-radius: var(--radius-full);
-      display: flex;
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      min-height: 38px;
+      border-radius: 50% !important;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       color: var(--text-primary);
-      transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
-      box-shadow: var(--shadow-sm);
-      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       flex-shrink: 0;
-  min-width: 36px;
-  min-height: 36px;
-  line-height: 1;
-}
+      line-height: 1;
+      padding: 0;
+    }
 
-    .icon-btn:hover {
-      transform: translateY(-2px);
+    .icon-btn:hover, .action-btn:hover {
       border-color: var(--primary);
+      background-color: var(--primary-light);
       color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .icon-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
     }
 
@@ -1265,48 +1280,78 @@
         triggerSocialAuth('Apple ID');
       });
 
-      // Dark Theme Toggle
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = document.getElementById('themeIcon');
-      
+      // Theme & RTL handled by Universal Controller below.
+    });
+  </script>
+
+  <!-- --- Universal Theme & RTL Toggle Manager --- -->
+  <script>
+    (function() {
       const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
       const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
 
       function applyTheme(isDark) {
         if (isDark) {
+          document.documentElement.classList.add('dark');
           document.body.classList.add('dark');
-          themeIcon.innerHTML = `<path d="${sunPath}" />`;
           localStorage.setItem('theme', 'dark');
         } else {
+          document.documentElement.classList.remove('dark');
           document.body.classList.remove('dark');
-          themeIcon.innerHTML = `<path d="${moonPath}" />`;
           localStorage.setItem('theme', 'light');
+        }
+        
+        const themeIcon = document.getElementById('themeIcon');
+        const themeIconMobile = document.getElementById('themeIconMobile');
+        const themeTextMobile = document.getElementById('themeToggleTextMobile');
+        const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
+
+        if (themeIcon) themeIcon.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+        if (themeTextMobile) themeTextMobile.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      }
+
+      function applyRTL(isRTL) {
+        if (isRTL) {
+          document.documentElement.setAttribute('dir', 'rtl');
+          document.documentElement.setAttribute('lang', 'ar');
+          localStorage.setItem('dir', 'rtl');
+        } else {
+          document.documentElement.setAttribute('dir', 'ltr');
+          document.documentElement.setAttribute('lang', 'en');
+          localStorage.setItem('dir', 'ltr');
         }
       }
 
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
 
-      themeToggle.addEventListener('click', () => {
-        const isDark = document.body.classList.contains('dark');
-        applyTheme(!isDark);
+        const savedDir = localStorage.getItem('dir');
+        applyRTL(savedDir === 'rtl');
+
+        const themeBtns = document.querySelectorAll('#themeToggle, #themeToggleMobile, #themeToggle-mobile');
+        themeBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentlyDark = document.body.classList.contains('dark') || document.documentElement.classList.contains('dark');
+            applyTheme(!currentlyDark);
+          });
+        });
+
+        const rtlBtns = document.querySelectorAll('#btn-rtl-toggle, #rtlToggle, #rtlToggleMobile, #btn-rtl-toggle-mobile');
+        rtlBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentlyRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            applyRTL(!currentlyRTL);
+          });
+        });
       });
-
-      // RTL Direction Toggle
-      const rtlToggle = (document.getElementById('btn-rtl-toggle') || document.getElementById('rtlToggle'));
-      rtlToggle.addEventListener('click', () => {
-        const currentDir = document.documentElement.getAttribute('dir');
-        if (currentDir === 'rtl') {
-          document.documentElement.setAttribute('dir', 'ltr');
-          document.documentElement.setAttribute('lang', 'en');
-        } else {
-          document.documentElement.setAttribute('dir', 'rtl');
-          document.documentElement.setAttribute('lang', 'ar');
-        }
-      });
-
-    });
+    })();
   </script>
 </body>
 </html>
