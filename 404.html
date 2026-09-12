@@ -389,6 +389,13 @@
         width: 100%;
       }
     }
+  
+    /* Ensure mobile drawer is always hidden on desktop */
+    @media (min-width: 992px) {
+      .mobile-drawer, .mobile-overlay {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -505,12 +512,12 @@
         }
         
         const themeIcon = document.getElementById('themeIcon');
-        const themeIconMobile = document.getElementById('themeIconMobile');
+        const themeIconMobile = document.getElementById('themeToggleIconMobile') || document.getElementById('themeIconMobile');
         const themeTextMobile = document.getElementById('themeToggleTextMobile');
         const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
 
         if (themeIcon) themeIcon.innerHTML = iconSvg;
-        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = `<svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">${iconSvg}</svg>`;
         if (themeTextMobile) themeTextMobile.textContent = isDark ? 'Light Mode' : 'Dark Mode';
       }
 
@@ -524,6 +531,21 @@
           document.documentElement.setAttribute('lang', 'en');
           localStorage.setItem('dir', 'ltr');
         }
+          
+          const md = document.getElementById('mobileDrawer');
+          const mo = document.getElementById('mobileOverlay');
+          const mt = document.getElementById('mobileToggle');
+          if (md) md.classList.remove('active');
+          if (mo) mo.classList.remove('active');
+          if (mt) mt.classList.remove('active');
+          document.body.style.overflow = '';
+        
+        const rtlToggleTextMobile = document.getElementById('rtlToggleTextMobile');
+        if (rtlToggleTextMobile) {
+          rtlToggleTextMobile.textContent = isRTL ? 'LTR (English)' : 'RTL (عربي)';
+        }
+        
+
       }
 
       document.addEventListener('DOMContentLoaded', () => {

@@ -2032,6 +2032,13 @@
       padding-right: 0.95rem !important;
     }
 
+  
+    /* Ensure mobile drawer is always hidden on desktop */
+    @media (min-width: 992px) {
+      .mobile-drawer, .mobile-overlay {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2071,7 +2078,9 @@
       <!-- Desktop Action Controls with Dark Mode & RTL Icons -->
       <div class="nav-actions desktop-only-actions">
         <button class="action-btn icon-btn" id="btn-rtl-toggle" aria-label="Toggle LTR/RTL Layout" title="Switch layout direction">
-          <span style="font-size: 14px; font-weight: 700; line-height: 1;">⇄</span>
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z" />
+          </svg>
         </button>
         <button class="icon-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle light/dark theme">
           <svg id="themeIcon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">
@@ -2122,7 +2131,7 @@
           <span id="themeToggleTextMobile">Dark Mode</span>
         </button>
         <button class="drawer-toggle-btn" id="rtlToggleMobile">
-          <span>⇄</span>
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z" /></svg>
           <span id="rtlToggleTextMobile">RTL / LTR</span>
         </button>
       </div>
@@ -2238,17 +2247,17 @@
           <div class="dept-img-wrap">
             <img src="./images/Wedding Galas & Birthday Celebration Supply.jpg" alt="Wedding & Galas Contact Department">
           </div>
-          <h3>Wedding & Galas</h3>
+          <h3>Weddings & Banquet</h3>
           <p class="dept-email">events@floraluxdesign.com</p>
-          <p class="dept-desc">Dedicated wedding staging team for venue CAD planning.</p>
+          <p class="dept-desc">Dedicated wedding staging teams for venue room CAD plans.</p>
         </div>
 
         <div class="dept-card">
           <div class="dept-img-wrap">
             <img src="./images/From Growers.jpg" alt="Wholesale Supply Contact Department">
           </div>
-          <h3>Wholesale Supply</h3>
-          <p class="dept-email">bulk@floraluxdesign.com</p>
+          <h3>Wholesale Supplies</h3>
+          <p class="dept-email">orders@floraluxdesign.com</p>
           <p class="dept-desc">Pallet freight contracts, net-30 terms, and hotel supply.</p>
         </div>
 
@@ -2256,18 +2265,18 @@
           <div class="dept-img-wrap">
             <img src="./images/Behind the Bouquet.jpg" alt="Press & Media Contact Department">
           </div>
-          <h3>Press & Media</h3>
-          <p class="dept-email">media@floraluxdesign.com</p>
-          <p class="dept-desc">Editorial features, photoshoot loans, and brand kits.</p>
+          <h3>Press & Media Kits</h3>
+          <p class="dept-email">prteam@floraluxdesign.com</p>
+          <p class="dept-desc">Editorial features, photoshoot loans, and brand kit info.</p>
         </div>
 
         <div class="dept-card">
           <div class="dept-img-wrap">
             <img src="./images/Delivery Care Guide Keep Flowers Fresh.jpg" alt="General Care Contact Department">
           </div>
-          <h3>General Care</h3>
-          <p class="dept-email">care@floraluxdesign.com</p>
-          <p class="dept-desc">Order tracking, vase care advice, and gift note changes.</p>
+          <h3>General Order Care</h3>
+          <p class="dept-email">caring@floraluxdesign.com</p>
+          <p class="dept-desc">Order tracking, vase care advices, and gift note changes.</p>
         </div>
       </div>
     </div>
@@ -2777,12 +2786,12 @@
         }
         
         const themeIcon = document.getElementById('themeIcon');
-        const themeIconMobile = document.getElementById('themeIconMobile');
+        const themeIconMobile = document.getElementById('themeToggleIconMobile') || document.getElementById('themeIconMobile');
         const themeTextMobile = document.getElementById('themeToggleTextMobile');
         const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
 
         if (themeIcon) themeIcon.innerHTML = iconSvg;
-        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = `<svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">${iconSvg}</svg>`;
         if (themeTextMobile) themeTextMobile.textContent = isDark ? 'Light Mode' : 'Dark Mode';
       }
 
@@ -2796,6 +2805,21 @@
           document.documentElement.setAttribute('lang', 'en');
           localStorage.setItem('dir', 'ltr');
         }
+          
+          const md = document.getElementById('mobileDrawer');
+          const mo = document.getElementById('mobileOverlay');
+          const mt = document.getElementById('mobileToggle');
+          if (md) md.classList.remove('active');
+          if (mo) mo.classList.remove('active');
+          if (mt) mt.classList.remove('active');
+          document.body.style.overflow = '';
+        
+        const rtlToggleTextMobile = document.getElementById('rtlToggleTextMobile');
+        if (rtlToggleTextMobile) {
+          rtlToggleTextMobile.textContent = isRTL ? 'LTR (English)' : 'RTL (عربي)';
+        }
+        
+
       }
 
       document.addEventListener('DOMContentLoaded', () => {

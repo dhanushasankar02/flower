@@ -2487,6 +2487,13 @@
       padding-right: 0.95rem !important;
     }
 
+  
+    /* Ensure mobile drawer is always hidden on desktop */
+    @media (min-width: 992px) {
+      .mobile-drawer, .mobile-overlay {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2526,7 +2533,9 @@
       <!-- Desktop Action Controls with Dark Mode & RTL Icons -->
       <div class="nav-actions desktop-only-actions">
         <button class="action-btn icon-btn" id="btn-rtl-toggle" aria-label="Toggle LTR/RTL Layout" title="Switch layout direction">
-          <span style="font-size: 14px; font-weight: 700; line-height: 1;">⇄</span>
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z" />
+          </svg>
         </button>
         <button class="icon-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle light/dark theme">
           <svg id="themeIcon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">
@@ -2577,7 +2586,7 @@
           <span id="themeToggleTextMobile">Dark Mode</span>
         </button>
         <button class="drawer-toggle-btn" id="rtlToggleMobile">
-          <span>⇄</span>
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z" /></svg>
           <span id="rtlToggleTextMobile">RTL / LTR</span>
         </button>
       </div>
@@ -2881,25 +2890,25 @@
         <div class="timeline-node">
           <div class="node-num">01</div>
           <h3>High-Altitude Clipping</h3>
-          <p>Harvested at 4:00 AM before transpiration begins to lock in natural moisture and vibrant colors.</p>
+          <p>Harvested exactly at dawn to lock in all natural moisture and vibrant botanical colorings.</p>
         </div>
 
         <div class="timeline-node">
           <div class="node-num">02</div>
-          <h3>Bio-Mineral Bath</h3>
-          <p>Soaked in nutrient-rich, pH-balanced spring water infused with organic botanical minerals.</p>
+          <h3>Bio-Mineral Water Bath</h3>
+          <p>Soaked in nutrient-rich, pH-balanced spring water infused with rare pure organic minerals.</p>
         </div>
 
         <div class="timeline-node">
           <div class="node-num">03</div>
-          <h3>Spiral Eco Binding</h3>
-          <p>Hand-bound by master florists using organic hemp twine without damaging wire fasteners.</p>
+          <h3>Spiral Eco Hemp Binder</h3>
+          <p>Hand-bound by master florists using organic hemp twine without damaging fine floral stems.</p>
         </div>
 
         <div class="timeline-node">
           <div class="node-num">04</div>
-          <h3>Vaulted Transport</h3>
-          <p>Shipped in custom shock-absorbing humidity chambers for guaranteed 14-day freshness.</p>
+          <h3>Vaulted Custom Transit</h3>
+          <p>Shipped inside custom shock-absorbing humidity chambers for a guaranteed 14-day freshness.</p>
         </div>
       </div>
 
@@ -3227,237 +3236,13 @@
         link.addEventListener('click', closeMobileMenu);
       });
 
-      // --- Theme Toggle (Desktop & Mobile Sync) ---
-      const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
-      const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
-
-      function applyTheme(isDark) {
-        const themeIcon = document.getElementById('themeIcon');
-        const themeIconMobile = document.getElementById('themeIconMobile');
-        const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
-
-        if (isDark) {
-          document.body.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          document.body.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        }
-
-        if (themeIcon) themeIcon.innerHTML = iconSvg;
-        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
-      }
-
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
-
-      const themeToggleDesktop = document.getElementById('themeToggle');
-      const themeToggleMobile = document.getElementById('themeToggle-mobile');
-
-      function handleThemeToggle() {
-        const isDark = document.body.classList.contains('dark');
-        applyTheme(!isDark);
-      }
-
-      if (themeToggleDesktop) themeToggleDesktop.addEventListener('click', handleThemeToggle);
-      if (themeToggleMobile) themeToggleMobile.addEventListener('click', handleThemeToggle);
-
-      // --- RTL Toggle (Desktop & Mobile Sync) ---
-      const rtlToggleDesktop = (document.getElementById('btn-rtl-toggle') || document.getElementById('rtlToggle'));
-      const rtlToggleMobile = document.getElementById('btn-rtl-toggle-mobile');
-
-      function handleRTLToggle() {
-        const currentDir = document.documentElement.getAttribute('dir');
-        if (currentDir === 'rtl') {
-          document.documentElement.setAttribute('dir', 'ltr');
-          document.documentElement.setAttribute('lang', 'en');
-        } else {
-          document.documentElement.setAttribute('dir', 'rtl');
-          document.documentElement.setAttribute('lang', 'ar');
-        }
-      }
-
-      if (rtlToggleDesktop) rtlToggleDesktop.addEventListener('click', handleRTLToggle);
-      if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', handleRTLToggle);
-
-      // Auth Modal
-      const loginBtn = document.getElementById('loginBtn');
-      const loginModalOverlay = document.getElementById('loginModalOverlay');
-      const modalCloseBtn = document.getElementById('modalCloseBtn');
-      const authForm = document.getElementById('authForm');
-      
-      const tabLoginBtn = document.getElementById('tabLoginBtn');
-      const tabRegisterBtn = document.getElementById('tabRegisterBtn');
-      const regFieldContainer = document.getElementById('regFieldContainer');
-      const authSubmitBtn = document.getElementById('authSubmitBtn');
-      const modalTitle = document.getElementById('modalTitle');
-
-      let isRegister = false;
-
-      function openModal() {
-        loginModalOverlay.classList.add('active');
-      }
-
-      function closeModal() {
-        loginModalOverlay.classList.remove('active');
-        authForm.reset();
-      }
-
-      function toggleAuthTab(registerActive) {
-        isRegister = registerActive;
-        if (registerActive) {
-          tabRegisterBtn.classList.add('active');
-          tabLoginBtn.classList.remove('active');
-          regFieldContainer.style.display = 'flex';
-          authSubmitBtn.textContent = 'Create Atelier Account';
-          modalTitle.textContent = 'New Client Registration';
-          document.getElementById('authName').required = true;
-        } else {
-          tabLoginBtn.classList.add('active');
-          tabRegisterBtn.classList.remove('active');
-          regFieldContainer.style.display = 'none';
-          authSubmitBtn.textContent = 'Client Sign In';
-          modalTitle.textContent = 'Client Access';
-          document.getElementById('authName').required = false;
-        }
-      }
-
-      // Check active user session
-      const userSessionData = localStorage.getItem('floraLuxUser');
-      if (userSessionData && loginBtn) {
-        try {
-          const user = JSON.parse(userSessionData);
-          if (user && user.isLoggedIn) {
-            loginBtn.textContent = user.name ? `Account (${user.name})` : 'VIP Account';
-            loginBtn.title = `Logged in as ${user.email || user.name}`;
-          }
-        } catch (e) {}
-      }
-
-      if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-      if (loginModalOverlay) {
-        loginModalOverlay.addEventListener('click', (e) => {
-          if (e.target === loginModalOverlay) closeModal();
-        });
-      }
-
-      if (tabLoginBtn) tabLoginBtn.addEventListener('click', () => toggleAuthTab(false));
-      if (tabRegisterBtn) tabRegisterBtn.addEventListener('click', () => toggleAuthTab(true));
-
-      if (authForm) {
-        authForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const email = document.getElementById('authEmail').value;
-          let userName = 'VIP Member';
-          if (isRegister) {
-            userName = document.getElementById('authName').value || 'VIP Member';
-          } else {
-            userName = email.split('@')[0] || 'VIP Member';
-          }
-          localStorage.setItem('floraLuxUser', JSON.stringify({ email, name: userName, isLoggedIn: true }));
-          showToast(`Authenticated as ${userName}`);
-          loginBtn.textContent = `Account (${userName})`;
-          closeModal();
-        });
-      }
-
-      // --- Home Bestseller Category Filter Tabs ---
-      const homeCatBtns = document.querySelectorAll('.home-cat-btn');
-      const homeCards = document.querySelectorAll('.home-product-card');
-
-      homeCatBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          homeCatBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const cat = btn.getAttribute('data-home-cat');
-
-          homeCards.forEach(card => {
-            const cardCats = card.getAttribute('data-cat') || '';
-            if (cat === 'all' || cardCats.includes(cat)) {
-              card.style.display = 'flex';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      // --- Home Add to Cart Toast Notification ---
-      document.querySelectorAll('.home-add-cart-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const name = btn.getAttribute('data-name');
-          const price = btn.getAttribute('data-price');
-          showToast(`Added ${name} (${price}) to cart!`);
-        });
-      });
-
-      const ctaBookBtn = document.getElementById('ctaBookBtn');
-      const ctaInquireBtn = document.getElementById('ctaInquireBtn');
-      if (ctaBookBtn) {
-        ctaBookBtn.addEventListener('click', () => {
-          showToast('Opening private commission booking portal...');
-        });
-      }
-      if (ctaInquireBtn) {
-        ctaInquireBtn.addEventListener('click', () => {
-          showToast('Downloading event portfolio PDF...');
-        });
-      }
-
     });
   </script>
-<script>
-  /* --- Universal Header & Right-Side Drawer Interaction Manager --- */
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const mobileDrawer = document.getElementById('mobileDrawer');
-
-    function openDrawer() {
-      if (mobileDrawer) mobileDrawer.classList.add('active');
-      if (mobileOverlay) mobileOverlay.classList.add('active');
-      if (mobileToggle) mobileToggle.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeDrawer() {
-      if (mobileDrawer) mobileDrawer.classList.remove('active');
-      if (mobileOverlay) mobileOverlay.classList.remove('active');
-      if (mobileToggle) mobileToggle.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (mobileDrawer && mobileDrawer.classList.contains('active')) {
-          closeDrawer();
-        } else {
-          openDrawer();
-        }
-      });
-    }
-
-    if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeDrawer);
-    if (mobileOverlay) mobileOverlay.addEventListener('click', closeDrawer);
-
-    document.querySelectorAll('.drawer-link, .drawer-login-btn').forEach(link => {
-      link.addEventListener('click', closeDrawer);
-    });
-
-    // Theme Toggle Handler (Desktop & Mobile Drawer Sync)
-    const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
-    const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
-
-    // Theme & RTL handled by Universal Controller below.
-  });
-</script>
-
+  
   <!-- --- Universal Theme & RTL Toggle Manager --- -->
   <script>
     (function() {
+      // --- Theme Toggle (Desktop & Mobile Sync) ---
       const moonPath = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
       const sunPath = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41z';
 
@@ -3473,12 +3258,12 @@
         }
         
         const themeIcon = document.getElementById('themeIcon');
-        const themeIconMobile = document.getElementById('themeIconMobile');
+        const themeIconMobile = document.getElementById('themeToggleIconMobile') || document.getElementById('themeIconMobile');
         const themeTextMobile = document.getElementById('themeToggleTextMobile');
         const iconSvg = isDark ? `<path d="${sunPath}" />` : `<path d="${moonPath}" />`;
 
         if (themeIcon) themeIcon.innerHTML = iconSvg;
-        if (themeIconMobile) themeIconMobile.innerHTML = iconSvg;
+        if (themeIconMobile) themeIconMobile.innerHTML = `<svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;">${iconSvg}</svg>`;
         if (themeTextMobile) themeTextMobile.textContent = isDark ? 'Light Mode' : 'Dark Mode';
       }
 
@@ -3492,6 +3277,21 @@
           document.documentElement.setAttribute('lang', 'en');
           localStorage.setItem('dir', 'ltr');
         }
+          
+          const md = document.getElementById('mobileDrawer');
+          const mo = document.getElementById('mobileOverlay');
+          const mt = document.getElementById('mobileToggle');
+          if (md) md.classList.remove('active');
+          if (mo) mo.classList.remove('active');
+          if (mt) mt.classList.remove('active');
+          document.body.style.overflow = '';
+        
+        const rtlToggleTextMobile = document.getElementById('rtlToggleTextMobile');
+        if (rtlToggleTextMobile) {
+          rtlToggleTextMobile.textContent = isRTL ? 'LTR (English)' : 'RTL (عربي)';
+        }
+        
+
       }
 
       document.addEventListener('DOMContentLoaded', () => {
